@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   ScrollView,
@@ -13,11 +13,23 @@ import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import { auth } from "../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ToastAndroid } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   //Save typed Username and Password
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.navigate("Home");
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   //Load fonts
   let [fontsLoaded] = useFonts({
@@ -29,13 +41,13 @@ const LoginScreen = () => {
   }
 
   //Handle OnClick Button
-
   const handleSignIn = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, userName, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        navigation.navigate("Home");
         ToastAndroid.show("Logged In", ToastAndroid.SHORT);
 
         // ...
@@ -43,6 +55,8 @@ const LoginScreen = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+
+        ToastAndroid.show("Failed to Log In", ToastAndroid.SHORT);
       });
   };
 
