@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  StatusBar,
 } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import { auth } from "../firebase";
