@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import Attendance from "./ClassroomDetails/Attendance";
 
 const ClassroomDetails = () => {
   let internships = 5;
@@ -56,9 +57,11 @@ const ClassroomDetails = () => {
             >
               Attendance
             </Text>
+
             <View style={{ alignItems: "center" }}>
               <View style={styles.attendanceLine} />
             </View>
+            <Attendance />
           </TouchableOpacity>
         </View>
 
