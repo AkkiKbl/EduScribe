@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
 const welcomeName = () => {
-  let firstName = "Rohan";
+  let firstName = "Rohan" + "!";
 
   return (
     <View style={{ color: "white" }}>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   welcome_2: {
     marginLeft: 20,
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
     color: "white",
   },

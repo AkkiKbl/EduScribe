@@ -6,7 +6,7 @@ const Attendance = () => {
   const [attendance, setAttendance] = useState(0);
 
   useEffect(() => {
-    setAttendance(0.6);
+    setAttendance(0.65);
   }, []);
 
   return (
