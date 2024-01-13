@@ -20,13 +20,16 @@ const notice = () => {
 
   return (
 
-    <View>
+    <View >
       <StatusBar
         barStyle="light-content" translucent backgroundColor={"#474747"} />
-      <Text style={styles.titleText}>Notices</Text>
-      <View style={styles.line} />
+      <View style={{ marginLeft: 20 }}>
+        <Text style={styles.titleText}>Notices</Text>
+        <View style={styles.line} />
+      </View>
       <View style={{ marginTop: 20 }} >
         <FlatList
+          style={{ paddingStart: 10 }}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id}
@@ -52,10 +55,9 @@ const styles = StyleSheet.create({
     color: "white",
   },
   cards: {
-    flex: 1,
     width: 180,
     height: 130,
-    marginRight: 10,
+    marginRight: 20,
     backgroundColor: "#171717",
     color: "white",
     borderRadius: 10,

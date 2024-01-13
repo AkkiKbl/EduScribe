@@ -17,11 +17,13 @@ export default welcomeName;
 const styles = StyleSheet.create({
   welcome_1: {
     marginTop: 50,
+    marginLeft: 20,
     fontSize: 25,
     fontFamily: "Pacifico_400Regular",
     color: "white",
   },
   welcome_2: {
+    marginLeft: 20,
     fontSize: 25,
     fontWeight: "bold",
     color: "white",

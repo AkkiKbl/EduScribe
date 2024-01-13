@@ -124,7 +124,6 @@ export default ClassroomDetails;
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    marginRight: 20,
     width: 350,
     height: 380,
     borderRadius: 10,

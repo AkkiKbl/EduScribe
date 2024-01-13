@@ -42,7 +42,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 20,
     backgroundColor: "#474747",
     color: "white",
   },

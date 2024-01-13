@@ -64,15 +64,12 @@ const ServiceCards = () => {
 export default ServiceCards;
 
 const styles = StyleSheet.create({
-  container: {
-    marginRight: 20,
-  },
   card1: {
     width: 150,
     height: 150,
     backgroundColor: "#171717",
     flexDirection: "column-reverse",
-    marginRight: 50,
+    marginRight: 35,
     borderRadius: 10,
   },
   card2: {
