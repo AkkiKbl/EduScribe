@@ -26,7 +26,7 @@ const LoginScreen = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.navigate("Home");
+        navigation.navigate("HomeGroupStack"); //Navigate to HomeScreen if the user is already logged In
       }
     });
     return unsubscribe;
@@ -48,7 +48,7 @@ const LoginScreen = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigation.navigate("Home");
+        navigation.navigate("HomeGroupStack"); //Navigate to HomeScreen
         ToastAndroid.show("Logged In", ToastAndroid.SHORT);
 
         // ...

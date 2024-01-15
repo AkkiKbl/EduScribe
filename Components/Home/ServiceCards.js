@@ -1,8 +1,16 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import React from "react";
-import NoticeIcon from "../../assets/HomeScreen/notice.svg";
+import { useNavigation } from "@react-navigation/native";
 
 const ServiceCards = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* First line Cards */}
@@ -22,13 +30,16 @@ const ServiceCards = () => {
           </Text>
           <View></View>
         </View>
-        <View style={styles.card2}>
+        <TouchableOpacity
+          style={styles.card2}
+          onPress={() => navigation.navigate("Canteen")}
+        >
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
             Canteen
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Second Line Cards */}
