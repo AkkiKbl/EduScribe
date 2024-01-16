@@ -9,7 +9,7 @@ const HomeStack = createNativeStackNavigator();
 
 function HomeStackGroup() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator initialRouteName="Home">
       <HomeStack.Screen
         options={{ headerShown: false }}
         name="Home"

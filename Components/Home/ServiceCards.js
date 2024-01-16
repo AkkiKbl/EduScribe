@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  FlatList,
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -12,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const ServiceCards = () => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <View>
       {/* First line Cards */}
       <View
         style={{
@@ -22,14 +23,29 @@ const ServiceCards = () => {
           marginTop: 20,
         }}
       >
-        <View style={styles.card1}>
+        <TouchableOpacity style={styles.card1}>
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
-            Notice
+            Academics
           </Text>
-          <View></View>
-        </View>
+
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../assets/HomeScreen/academics.png")}
+              style={{
+                width: 100,
+                resizeMode: "contain",
+              }}
+            />
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.card2}
           onPress={() => navigation.navigate("Canteen")}
@@ -39,6 +55,21 @@ const ServiceCards = () => {
           >
             Canteen
           </Text>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../assets/HomeScreen/canteen.png")}
+              style={{
+                width: 80,
+                resizeMode: "contain",
+              }}
+            />
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -52,21 +83,51 @@ const ServiceCards = () => {
           marginBottom: 10,
         }}
       >
-        <View style={styles.card1}>
+        <TouchableOpacity style={styles.card1}>
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
-            Academic
+            Notices
           </Text>
-          <View></View>
-        </View>
-        <View style={styles.card2}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../assets/HomeScreen/notices.png")}
+              style={{
+                width: 68,
+                resizeMode: "contain",
+              }}
+            />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card2}>
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
             Feedback
           </Text>
-        </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: 12,
+            }}
+          >
+            <Image
+              source={require("../../assets/HomeScreen/feedback.png")}
+              style={{
+                width: 75,
+                resizeMode: "contain",
+              }}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

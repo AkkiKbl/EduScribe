@@ -50,8 +50,6 @@ const LoginScreen = () => {
         const user = userCredential.user;
         navigation.navigate("HomeGroupStack"); //Navigate to HomeScreen
         ToastAndroid.show("Logged In", ToastAndroid.SHORT);
-
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
