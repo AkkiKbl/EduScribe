@@ -8,7 +8,6 @@ const CanteenScreen = () => {
         <Text style={{ color: "white" }}>
           <Text>Canteen</Text>
         </Text>
-        <Image source={require("../assets/HomeScreen/academics.png")} />
       </View>
     </SafeAreaView>
   );
