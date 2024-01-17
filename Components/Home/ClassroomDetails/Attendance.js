@@ -21,10 +21,10 @@ const Attendance = () => {
       <View style={styles.progressCircle}>
         <Progress.Circle
           progress={attendance}
-          size={110}
+          size={130}
           borderWidth={0}
           color="white"
-          thickness={6}
+          thickness={7}
           strokeCap="round"
           showsText
         />

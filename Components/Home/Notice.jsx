@@ -27,9 +27,9 @@ const notice = () => {
         <Text style={styles.titleText}>Notices</Text>
         <View style={styles.line} />
       </View>
-      <View style={{ marginTop: 20 }} >
+      <View style={{ marginTop: 20, flex: 1, alignContent: "space-around" }} >
         <FlatList
-          style={{ paddingStart: 10 }}
+          style={{ paddingStart: 10, flex: 1, alignContent: "space-around" }}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id}

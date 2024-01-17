@@ -21,10 +21,9 @@ const ClassroomDetails = () => {
             <Text
               style={{
                 color: "white",
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: "300",
-                marginLeft: 10,
-                marginTop: 15,
+                marginLeft: 15,
               }}
             >
               Internships:
@@ -32,8 +31,8 @@ const ClassroomDetails = () => {
             <Text
               style={{
                 color: "white",
-                fontSize: 30,
-                marginLeft: 10,
+                fontSize: 32,
+                marginLeft: 15,
                 marginTop: 5,
                 fontWeight: "700",
               }}
@@ -50,7 +49,7 @@ const ClassroomDetails = () => {
                 color: "white",
                 textAlign: "center",
                 fontWeight: "300",
-                marginBottom: 10,
+                marginBottom: 15,
                 fontSize: 20,
                 fontWeight: "500",
               }}
@@ -71,10 +70,9 @@ const ClassroomDetails = () => {
             <Text
               style={{
                 color: "white",
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: "300",
-                marginLeft: 10,
-                marginTop: 15,
+                marginLeft: 15,
               }}
             >
               Deadlines:
@@ -82,8 +80,8 @@ const ClassroomDetails = () => {
             <Text
               style={{
                 color: "white",
-                fontSize: 30,
-                marginLeft: 10,
+                fontSize: 32,
+                marginLeft: 15,
                 marginTop: 5,
                 fontWeight: "700",
               }}
@@ -107,7 +105,7 @@ const ClassroomDetails = () => {
                 color: "white",
                 textAlign: "center",
                 fontWeight: "400",
-                fontSize: 15,
+                fontSize: 20,
               }}
             >
               Classroom
@@ -124,15 +122,15 @@ export default ClassroomDetails;
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    width: 350,
-    height: 380,
+    width: "90%",
+    height: 450,
     borderRadius: 10,
     backgroundColor: "#171717",
   },
   bcaText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 30,
     textAlign: "center",
     paddingTop: 10,
   },
@@ -144,16 +142,17 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   card1: {
-    width: 150,
-    height: 100,
+    width: "45%",
+    height: "75%",
     backgroundColor: "#424242",
     marginLeft: 20,
     marginTop: 20,
     borderRadius: 10,
+    justifyContent: "center",
   },
   card2: {
-    width: 150,
-    height: 215,
+    width: "42%",
+    height: "163%",
     backgroundColor: "#424242",
     marginLeft: 10,
     marginTop: 20,
@@ -161,18 +160,20 @@ const styles = StyleSheet.create({
     flexDirection: "column-reverse",
   },
   card3: {
-    width: 150,
-    height: 100,
+    width: "45%",
+    height: "75%",
     backgroundColor: "#424242",
     marginLeft: 20,
     borderRadius: 10,
+    justifyContent: "center",
   },
   card4: {
-    width: 200,
-    height: 40,
+    width: "65%",
+    height: 50,
     backgroundColor: "#424242",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 25,
+    marginBottom: "2%",
   },
   attendanceLine: {
     backgroundColor: "#222222",

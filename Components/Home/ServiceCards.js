@@ -23,7 +23,7 @@ const ServiceCards = () => {
           marginTop: 20,
         }}
       >
-        <TouchableOpacity style={styles.card1}>
+        <TouchableOpacity style={[styles.card1, styles.cards]}>
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
@@ -40,14 +40,14 @@ const ServiceCards = () => {
             <Image
               source={require("../../assets/HomeScreen/academics.png")}
               style={{
-                width: 100,
+                width: "60%",
                 resizeMode: "contain",
               }}
             />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.card2}
+          style={[styles.card2, styles.cards]}
           onPress={() => navigation.navigate("Canteen")}
         >
           <Text
@@ -65,7 +65,7 @@ const ServiceCards = () => {
             <Image
               source={require("../../assets/HomeScreen/canteen.png")}
               style={{
-                width: 80,
+                width: "50%",
                 resizeMode: "contain",
               }}
             />
@@ -83,7 +83,7 @@ const ServiceCards = () => {
           marginBottom: 10,
         }}
       >
-        <TouchableOpacity style={styles.card1}>
+        <TouchableOpacity style={[styles.card1, styles.cards]}>
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
@@ -99,13 +99,13 @@ const ServiceCards = () => {
             <Image
               source={require("../../assets/HomeScreen/notices.png")}
               style={{
-                width: 68,
+                width: "50%",
                 resizeMode: "contain",
               }}
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.card2}>
+        <TouchableOpacity style={[styles.card2, styles.cards]}>
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >
@@ -122,7 +122,7 @@ const ServiceCards = () => {
             <Image
               source={require("../../assets/HomeScreen/feedback.png")}
               style={{
-                width: 75,
+                width: "50%",
                 resizeMode: "contain",
               }}
             />
@@ -136,17 +136,17 @@ const ServiceCards = () => {
 export default ServiceCards;
 
 const styles = StyleSheet.create({
+  cards: {
+    width: "40%",
+    height: 180,
+  },
   card1: {
-    width: 150,
-    height: 150,
     backgroundColor: "#171717",
     flexDirection: "column-reverse",
     marginRight: 35,
     borderRadius: 10,
   },
   card2: {
-    width: 150,
-    height: 150,
     backgroundColor: "#171717",
     flexDirection: "column-reverse",
     borderRadius: 10,
