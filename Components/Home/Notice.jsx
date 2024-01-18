@@ -21,8 +21,7 @@ const notice = () => {
   return (
 
     <View >
-      <StatusBar
-        barStyle="light-content" translucent backgroundColor={"#474747"} />
+
       <View style={{ marginLeft: 20 }}>
         <Text style={styles.titleText}>Notices</Text>
         <View style={styles.line} />

@@ -1,14 +1,22 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  StatusBar,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Section_1 from "../Components/Canteen/Section_1";
+import Section_2 from "../Components/Canteen/Section_2";
 const CanteenScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text style={{ color: "white" }}>
-          <Text>Canteen</Text>
-        </Text>
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Section_1 />
+        <Section_2 />
+      </ScrollView>
     </SafeAreaView>
   );
 };

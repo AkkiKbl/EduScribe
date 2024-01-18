@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import Notice from "../Components/Home/Notice";
@@ -24,6 +25,11 @@ const HomeScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor={"#474747"}
+      />
       <View style={styles.container}>
         <WelcomeName />
         <Notice />
