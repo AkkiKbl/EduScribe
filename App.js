@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import CanteenScreen from "./screens/CanteenScreen";
+import AcademicsScreen from "./screens/AcademicsScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -19,6 +20,11 @@ function HomeStackGroup() {
         options={{ headerShown: false }}
         name="Canteen"
         component={CanteenScreen}
+      />
+      <HomeStack.Screen
+        options={{ headerShown: false }}
+        name="Academics"
+        component={AcademicsScreen}
       />
     </HomeStack.Navigator>
   );

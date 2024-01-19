@@ -25,11 +25,7 @@ const HomeScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <StatusBar
-        barStyle="light-content"
-        translucent
-        backgroundColor={"#474747"}
-      />
+      <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
       <View style={styles.container}>
         <WelcomeName />
         <Notice />
