@@ -5,10 +5,29 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import FoodItems from "../../resources/CanteenMenu";
 
 const CanteenMeal = () => {
+  const [IsSelected, setIsSelected] = useState(false);
+  let count = 0;
+
+  function AddItems() {
+    return (
+      <View>
+        {IsSelected ? (
+          <View>
+            <Text>-</Text>
+            <Text>{count}</Text>
+            <Text>+</Text>
+          </View>
+        ) : (
+          <Text style={styles.addButtonText}>Add</Text>
+        )}
+      </View>
+    );
+  }
+
   return (
     <View>
       {/* Meal List */}
@@ -32,7 +51,7 @@ const CanteenMeal = () => {
               renderItem={({ item }) => (
                 <View style={styles.cards}>
                   <TouchableOpacity style={styles.menuButton}>
-                    <Text style={styles.addButtonText}>Add</Text>
+                    <AddItems />
                   </TouchableOpacity>
                   <Text style={styles.textColor}>Rs.{item.price}</Text>
                   <Text style={styles.textColor}>{item.foodItem}</Text>
