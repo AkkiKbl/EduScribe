@@ -168,12 +168,14 @@ const styles = StyleSheet.create({
   },
   cards: {
     backgroundColor: "black",
-    width: 170,
-    height: 250,
+    width: 180,
+    height: 260,
     borderRadius: 10,
-    margin: "5%",
+    marginRight: 10,
+    marginLeft: 10,
     flexDirection: "column-reverse",
     alignItems: "center",
+    marginTop: 20,
   },
   textColor: {
     color: "white",
