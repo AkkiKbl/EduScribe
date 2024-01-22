@@ -5,67 +5,19 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import FoodItems from "../../resources/CanteenMenu";
+import React, { useEffect, useState } from "react";
+import Canteen_menu from "./Canteen_Menu/Canteen_menu";
 
 const CanteenMeal = () => {
-  const [IsSelected, setIsSelected] = useState(false);
-  let count = 0;
-
-  function AddItems() {
-    return (
-      <View>
-        {IsSelected ? (
-          <View>
-            <Text>-</Text>
-            <Text>{count}</Text>
-            <Text>+</Text>
-          </View>
-        ) : (
-          <Text style={styles.addButtonText}>Add</Text>
-        )}
-      </View>
-    );
-  }
-
   return (
     <View>
       {/* Meal List */}
-      <View>
-        <View style={styles.titleText}>
-          <Text style={styles.TextColor}>Meal</Text>
-          <View style={styles.line} />
-        </View>
-        <View
-          style={{
-            justifyContent: "space-around",
-            flexDirection: "row",
-          }}
-        >
-          <View style={{ justifyContent: "space-around" }}>
-            <FlatList
-              numColumns={"2"}
-              scrollEnabled={false}
-              keyExtractor={(item) => item.id}
-              data={FoodItems.Meal}
-              renderItem={({ item }) => (
-                <View style={styles.cards}>
-                  <TouchableOpacity style={styles.menuButton}>
-                    <AddItems />
-                  </TouchableOpacity>
-                  <Text style={styles.textColor}>Rs.{item.price}</Text>
-                  <Text style={styles.textColor}>{item.foodItem}</Text>
-                  <View style={styles.line} />
-                </View>
-              )}
-            />
-          </View>
-        </View>
-      </View>
+
+      <Canteen_menu />
 
       {/* Snacks List */}
 
-      <View>
+      {/* <View>
         <View style={styles.titleText}>
           <Text style={styles.TextColor}>Snacks</Text>
           <View style={styles.line} />
@@ -95,11 +47,11 @@ const CanteenMeal = () => {
             />
           </View>
         </View>
-      </View>
+      </View> */}
 
       {/* Drinks List */}
 
-      <View>
+      {/* <View>
         <View style={styles.titleText}>
           <Text style={styles.TextColor}>Drinks</Text>
           <View style={styles.line} />
@@ -129,10 +81,10 @@ const CanteenMeal = () => {
             />
           </View>
         </View>
-      </View>
+      </View> */}
 
       {/* Extras List */}
-      <View>
+      {/* <View>
         <View style={styles.titleText}>
           <Text style={styles.TextColor}>Extras</Text>
           <View style={styles.line} />
@@ -163,61 +115,9 @@ const CanteenMeal = () => {
             />
           </View>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };
 
 export default CanteenMeal;
-
-const styles = StyleSheet.create({
-  line: {
-    backgroundColor: "black",
-    width: 120,
-    height: 2,
-    borderRadius: 30,
-  },
-  TextColor: {
-    color: "white",
-    fontSize: 25,
-  },
-  titleText: {
-    marginTop: 20,
-    marginLeft: 20,
-  },
-  cards: {
-    backgroundColor: "black",
-    width: 180,
-    height: 260,
-    borderRadius: 10,
-    marginRight: 10,
-    marginLeft: 10,
-    flexDirection: "column-reverse",
-    alignItems: "center",
-    marginTop: 20,
-  },
-  textColor: {
-    color: "white",
-    fontSize: 16,
-  },
-  addButtonText: {
-    color: "black",
-    fontWeight: "600",
-  },
-  menuButton: {
-    backgroundColor: "white",
-    width: "70%",
-    height: 30,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 15,
-    marginTop: 10,
-  },
-  line: {
-    backgroundColor: "white",
-    width: "80%",
-    height: 1,
-    marginBottom: 5,
-  },
-});

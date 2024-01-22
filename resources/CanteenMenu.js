@@ -1,28 +1,28 @@
 export const FoodItems = {
   Meal: [
     {
-      id: 1,
+      id: 11,
       foodItem: "Chicken Noodles",
       price: 50,
       nonVeg: true,
       link: "",
     },
     {
-      id: 2,
+      id: 12,
       foodItem: "Chicken Fried Rice",
       price: 50,
       nonVeg: true,
       link: "",
     },
     {
-      id: 3,
+      id: 13,
       foodItem: "Paneer Masala",
       price: 40,
       nonVeg: false,
       link: "",
     },
     {
-      id: 4,
+      id: 14,
       foodItem: "Steamed Rice",
       price: 30,
       nonVeg: false,
@@ -31,21 +31,21 @@ export const FoodItems = {
   ],
   Snacks: [
     {
-      id: 1,
+      id: 21,
       foodItem: "Veg Pattice",
       price: 10,
       nonVeg: false,
       link: "",
     },
     {
-      id: 2,
+      id: 22,
       foodItem: "Egg Pattice",
       price: 15,
       nonVeg: true,
       link: "",
     },
     {
-      id: 3,
+      id: 23,
       foodItem: "Mirchi",
       price: 10,
       nonVeg: false,
@@ -54,7 +54,7 @@ export const FoodItems = {
   ],
   Extras: [
     {
-      id: 1,
+      id: 41,
       foodItem: "Bread",
       price: 5,
       nonVeg: false,
@@ -63,18 +63,20 @@ export const FoodItems = {
   ],
   Drinks: [
     {
-      id: 1,
+      id: 31,
       foodItem: "7up",
       price: 10,
       nonVeg: false,
       link: "",
+      isSelected: false,
     },
     {
-      id: 2,
+      id: 32,
       foodItem: "Mountain Dew",
       price: 10,
       nonVeg: false,
       link: "",
+      isSelected: false,
     },
   ],
 };
