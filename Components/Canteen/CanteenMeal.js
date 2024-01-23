@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import Canteen_menu from "./Canteen_Menu/Canteen_menu";
+import Canteen_menu1 from "./Canteen_Menu/Canteen_menu1";
 
 const CanteenMeal = () => {
   return (
     <View>
       {/* Meal List */}
 
-      <Canteen_menu />
+      <Canteen_menu1 />
 
       {/* Snacks List */}
 

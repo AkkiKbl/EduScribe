@@ -6,6 +6,7 @@ export const FoodItems = {
       price: 50,
       nonVeg: true,
       link: "",
+      tag: "Meal",
     },
     {
       id: 12,
@@ -13,6 +14,7 @@ export const FoodItems = {
       price: 50,
       nonVeg: true,
       link: "",
+      tag: "Meal",
     },
     {
       id: 13,
@@ -20,6 +22,7 @@ export const FoodItems = {
       price: 40,
       nonVeg: false,
       link: "",
+      tag: "Meal",
     },
     {
       id: 14,
@@ -27,6 +30,7 @@ export const FoodItems = {
       price: 30,
       nonVeg: false,
       link: "",
+      tag: "Meal",
     },
   ],
   Snacks: [
@@ -36,6 +40,7 @@ export const FoodItems = {
       price: 10,
       nonVeg: false,
       link: "",
+      tag: "Snacks",
     },
     {
       id: 22,
@@ -43,6 +48,7 @@ export const FoodItems = {
       price: 15,
       nonVeg: true,
       link: "",
+      tag: "Snacks",
     },
     {
       id: 23,
@@ -50,6 +56,7 @@ export const FoodItems = {
       price: 10,
       nonVeg: false,
       link: "",
+      tag: "Snacks",
     },
   ],
   Extras: [
@@ -59,6 +66,7 @@ export const FoodItems = {
       price: 5,
       nonVeg: false,
       link: "",
+      tag: "Extras",
     },
   ],
   Drinks: [
@@ -69,6 +77,7 @@ export const FoodItems = {
       nonVeg: false,
       link: "",
       isSelected: false,
+      tag: "Drinks",
     },
     {
       id: 32,
@@ -77,6 +86,7 @@ export const FoodItems = {
       nonVeg: false,
       link: "",
       isSelected: false,
+      tag: "Drinks",
     },
   ],
 };
