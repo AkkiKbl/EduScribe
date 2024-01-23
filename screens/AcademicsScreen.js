@@ -5,8 +5,8 @@ import Acad_Section2 from "../Components/Academics/Acad_Section2";
 
 const AcademicsScreen = () => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <View>
         <StatusBar backgroundColor={"#2F2F2F"} />
         <Acad_Section1 />
         <Acad_Section2 />

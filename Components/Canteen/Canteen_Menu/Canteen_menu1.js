@@ -220,7 +220,7 @@ const Canteen_menu = () => {
         <View
           style={{
             justifyContent: "space-around",
-            flexDirection: "row",
+            alignItems: "center",
           }}
         >
           <FlatList
@@ -294,7 +294,7 @@ const Canteen_menu = () => {
         <View
           style={{
             justifyContent: "space-around",
-            flexDirection: "row",
+            alignItems: "center",
           }}
         >
           <FlatList
@@ -370,7 +370,7 @@ const Canteen_menu = () => {
         <View
           style={{
             justifyContent: "space-around",
-            flexDirection: "row",
+            alignItems: "center",
           }}
         >
           <FlatList
