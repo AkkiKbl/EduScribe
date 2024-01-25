@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import Attendance from "./ClassroomDetails/Attendance";
+import { useNavigation } from "@react-navigation/native";
 
 const ClassroomDetails = () => {
+  const navigation = useNavigation();
+
   let internships = 5;
   let deadlines = 2;
   let department = "BCA";
@@ -17,7 +20,10 @@ const ClassroomDetails = () => {
 
         <View style={{ flex: 1, flexDirection: "row" }}>
           {/* Card 1 */}
-          <TouchableOpacity style={styles.card1}>
+          <TouchableOpacity
+            style={styles.card1}
+            onPress={() => navigation.navigate("Internships")}
+          >
             <Text
               style={{
                 color: "white",

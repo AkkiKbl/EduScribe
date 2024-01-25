@@ -446,12 +446,6 @@ const Canteen_menu = () => {
 export default Canteen_menu;
 
 const styles = StyleSheet.create({
-  line: {
-    backgroundColor: "black",
-    width: 120,
-    height: 2,
-    borderRadius: 30,
-  },
   TextColor: {
     color: "white",
     fontSize: 25,
@@ -491,7 +485,7 @@ const styles = StyleSheet.create({
   },
   line: {
     backgroundColor: "white",
-    width: "80%",
+    width: "70%",
     height: 1,
     marginBottom: 5,
   },

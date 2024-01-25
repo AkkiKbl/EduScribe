@@ -4,6 +4,7 @@ import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import CanteenScreen from "./screens/CanteenScreen";
 import AcademicsScreen from "./screens/AcademicsScreen";
+import InternshipsScreen from "./screens/InternshipsScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -25,6 +26,11 @@ function HomeStackGroup() {
         options={{ headerShown: false }}
         name="Academics"
         component={AcademicsScreen}
+      />
+      <HomeStack.Screen
+        options={{ headerShown: false }}
+        name="Internships"
+        component={InternshipsScreen}
       />
     </HomeStack.Navigator>
   );
@@ -54,12 +60,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
