@@ -1,8 +1,26 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, useColorScheme } from "react-native";
 import React from "react";
-import { StatusBar } from "react-native";
+
+import { auth, db } from "../../firebase"
+import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
 
 const notice = () => {
+
+  const data1 = [];
+
+  const getNotices = async () => {
+    const querySnapshot = await getDocs(collection(db, "notices"));
+    querySnapshot.forEach((doc) => {
+      data1.push(doc.data())
+    });
+
+    console.log(data1);
+
+
+
+  }
+
+  getNotices();
 
   const data = [{
     id: "1",
