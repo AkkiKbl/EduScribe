@@ -2,11 +2,27 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import Attendance from "./ClassroomDetails/Attendance";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect,useState } from "react";
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const ClassroomDetails = () => {
   const navigation = useNavigation();
+  const [Totalinternship,setTotalinternship]=useState('');
+  
+  useEffect(()=>{
+     const getInternTotal= async ()=>{
+      const querySnapshot = await getDocs(collection(db, "internships"));
+       setTotalinternship(querySnapshot.size);
+     
+       
+     }
+     getInternTotal();
+  },[]);
 
-  let internships = 5;
+  
+
+  let internships = Totalinternship;
   let deadlines = 2;
   let department = "BCA";
 
