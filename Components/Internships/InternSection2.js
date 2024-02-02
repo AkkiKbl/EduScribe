@@ -5,25 +5,26 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const InternSection2 = () => {
-  const data = [
-    {
-      id: 1,
-      internship: "Claysys",
-      stream: "BCA",
-      role: "Reactjs",
-      period: 5,
-    },
-    {
-      id: 2,
-      internship: "Persistent",
-      stream: "BCA",
-      role: "UI/UX",
-      period: 3,
-    },
-  ];
+  const [Internship, setInternship] = useState([]);
+
+  useEffect(() => {
+    const getInternships = async () => {
+      const querySnapshot = await getDocs(collection(db, "internships"));
+
+      const data1 = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setInternship(data1);
+    };
+
+    getInternships();
+  }, []);
 
   return (
     <View>
@@ -36,7 +37,7 @@ const InternSection2 = () => {
           <FlatList
             scrollEnabled={false}
             keyExtractor={(item) => item.id}
-            data={data}
+            data={Internship}
             renderItem={({ item }) => (
               <View>
                 <View style={styles.internshipCards}>
@@ -45,7 +46,7 @@ const InternSection2 = () => {
                       Company :
                     </Text>
                     <Text style={[styles.textColor, styles.detailInfo]}>
-                      {item.internship}
+                      {item.company}
                     </Text>
                   </View>
                   <View style={styles.detailSection}>
