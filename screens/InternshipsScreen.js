@@ -1,14 +1,16 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
 import InternSection1 from "../Components/Internships/InternSection1";
 import InternSection2 from "../Components/Internships/InternSection2";
 
 const InternshipsScreen = () => {
   return (
-    <View style={styles.container}>
-      <InternSection1 />
-      <InternSection2 />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <InternSection1 />
+        <InternSection2 />
+      </View>
+    </ScrollView>
   );
 };
 

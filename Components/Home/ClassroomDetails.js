@@ -1,12 +1,22 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Attendance from "./ClassroomDetails/Attendance";
 import { useNavigation } from "@react-navigation/native";
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const ClassroomDetails = () => {
   const navigation = useNavigation();
+  const [Totalinternship, setTotalinternship] = useState("");
 
-  let internships = 5;
+  useEffect(() => {
+    const getInternTotal = async () => {
+      const querySnapshot = await getDocs(collection(db, "internships"));
+      setTotalinternship(querySnapshot.size);
+    };
+    getInternTotal();
+  }, []);
+
   let deadlines = 2;
   let department = "BCA";
 
@@ -43,7 +53,7 @@ const ClassroomDetails = () => {
                 fontWeight: "700",
               }}
             >
-              {internships}
+              {Totalinternship}
             </Text>
           </TouchableOpacity>
 

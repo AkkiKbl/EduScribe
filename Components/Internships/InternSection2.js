@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: 1,
     width: "40%",
+    marginBottom: 20,
   },
   internshipTitle: {
     fontSize: 30,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     height: 150,
     width: 400,
-    marginTop: 20,
+    marginBottom: 10,
     borderRadius: 10,
   },
   detailInfo: {
