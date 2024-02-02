@@ -1,70 +1,52 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, useColorScheme } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
-import { auth, db } from "../../firebase"
-import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
+const Notice = () => {
+  const [notices, setNotices] = useState([]);
+  
 
-const notice = () => {
+  useEffect(() => {
+    const getNotices = async () => {
+      const querySnapshot = await getDocs(collection(db, "notices"));
+     
+      
+     
+      const data1 = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNotices(data1);
+    };
 
-  const data1 = [];
-
-  const getNotices = async () => {
-    const querySnapshot = await getDocs(collection(db, "notices"));
-    querySnapshot.forEach((doc) => {
-      data1.push(doc.data())
-    });
-
-    console.log(data1);
-
-
-
-  }
-
-  getNotices();
-
-  const data = [{
-    id: "1",
-    notice: "There will be a holiday on 26rd January"
-  },
-  {
-    id: "2",
-    notice: "ISA will start on 4th February"
-  },
-  {
-    id: "3",
-    notice: "Please collect your marksheet"
-  }
-  ]
+    getNotices();
+  }, []);
 
   return (
-
-    <View >
-
+    <View>
       <View style={{ marginLeft: 20 }}>
         <Text style={styles.titleText}>Notices</Text>
         <View style={styles.line} />
       </View>
-      <View style={{ marginTop: 20, flex: 1, alignContent: "space-around" }} >
+      <View style={{ marginTop: 20, flex: 1, alignContent: "space-around" }}>
         <FlatList
           style={{ paddingStart: 10, flex: 1, alignContent: "space-around" }}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id}
-          data={data}
-          renderItem={({ item }) =>
-            <Text style={styles.cards}> {item.notice}</Text>}
+          data={notices}
+          renderItem={({ item }) => <Text style={styles.cards}>{item.notice}</Text>}
         />
       </View>
     </View>
+   
   );
 };
 
-
-
-export default notice;
+export default Notice;
 
 const styles = StyleSheet.create({
-
   titleText: {
     marginTop: 20,
     fontWeight: "500",
@@ -81,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     textAlignVertical: "center",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   line: {
     marginTop: 4,
@@ -89,4 +71,4 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "white",
   },
-})
+});
