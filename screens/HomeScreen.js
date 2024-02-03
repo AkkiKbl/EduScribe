@@ -24,9 +24,9 @@ const HomeScreen = () => {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
-      <View style={styles.container}>
+      <View>
         <WelcomeName />
         <Notice />
         <ClassroomDetails />
