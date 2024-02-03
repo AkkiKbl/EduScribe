@@ -108,7 +108,10 @@ const ServiceCards = () => {
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.card2, styles.cards]}>
+        <TouchableOpacity
+          style={[styles.card2, styles.cards]}
+          onPress={() => navigation.navigate("Feedback")}
+        >
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}
           >

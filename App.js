@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CanteenScreen from "./screens/CanteenScreen";
 import AcademicsScreen from "./screens/AcademicsScreen";
 import InternshipsScreen from "./screens/InternshipsScreen";
+import FeedbackScreen from "./screens/FeedbackScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -31,6 +32,11 @@ function HomeStackGroup() {
         options={{ headerShown: false }}
         name="Internships"
         component={InternshipsScreen}
+      />
+      <HomeStack.Screen
+        options={{ headerShown: false }}
+        name="Feedback"
+        component={FeedbackScreen}
       />
     </HomeStack.Navigator>
   );
