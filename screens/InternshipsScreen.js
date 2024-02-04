@@ -5,8 +5,8 @@ import InternSection2 from "../Components/Internships/InternSection2";
 
 const InternshipsScreen = () => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <View>
         <InternSection1 />
         <InternSection2 />
       </View>

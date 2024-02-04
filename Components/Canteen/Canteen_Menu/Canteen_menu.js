@@ -103,8 +103,6 @@ const Canteen_menu = () => {
           item.quantity--;
         }
       });
-      //Re-Render List
-      reRender(tag);
     } else if (tag === "Snacks") {
       data2.forEach((item) => {
         if (item.id === id) {
@@ -114,8 +112,6 @@ const Canteen_menu = () => {
           item.quantity--;
         }
       });
-      //Re-Render List
-      reRender(tag);
     } else if (tag === "Drinks") {
       data3.forEach((item) => {
         if (item.id === id) {
@@ -125,8 +121,6 @@ const Canteen_menu = () => {
           item.quantity--;
         }
       });
-      //Re-Render List
-      reRender(tag);
     } else {
       data4.forEach((item) => {
         if (item.id === id) {
@@ -136,9 +130,9 @@ const Canteen_menu = () => {
           item.quantity--;
         }
       });
-      //Re-Render List
-      reRender(tag);
     }
+    //Re-Render List
+    reRender(tag);
   }
 
   // increment quantity
@@ -358,8 +352,6 @@ const Canteen_menu = () => {
   }
 
   //Drinks FlatList
-
-  //Snacks FlatList
   function RenderFlatlist3() {
     return (
       <View>

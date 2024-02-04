@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import React from "react";
 import FeedbackSection1 from "../Components/Feedback/FeedbackSection1";
 import FeedbackSection2 from "../Components/Feedback/FeedbackSection2";

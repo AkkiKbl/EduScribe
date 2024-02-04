@@ -6,49 +6,45 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import SelectDropdown from "react-native-select-dropdown";
-import { doc, addDoc, collection } from "firebase/firestore";
+import React, { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import { SelectList } from "react-native-dropdown-select-list";
 
 const FeedbackSection2 = () => {
-  const countries = ["College", "Teacher", "Canteen"];
-  const [feedbackItem, setFeedbackItem] = useState("None");
+  const [feedbackItem, setFeedbackItem] = useState({
+    key: "1",
+    value: "College",
+  });
   const [message, setMessage] = useState("");
 
   const addToFirebase = async (feedbackItem, message) => {
-    if (feedbackItem === "None") {
-      ToastAndroid.showWithGravity(
-        "Select Option",
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER
-      );
-    } else {
-      const docRef = await addDoc(collection(db, "feedback"), {
-        field: feedbackItem,
-        message: message,
-      });
-      ToastAndroid.showWithGravity(
-        "Submitted",
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER
-      );
-    }
+    await addDoc(collection(db, "feedback"), {
+      field: feedbackItem.value,
+      message: message,
+    });
+    ToastAndroid.showWithGravity(
+      "Submitted",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+    setMessage("");
   };
 
   const data = [
-    { value: "College" },
-    { value: "Teacher" },
-    { value: "Canteen" },
+    { key: "1", value: "College" },
+    { key: "2", value: "Teacher" },
+    { key: "3", value: "Canteen" },
   ];
 
   return (
     <View>
       <View style={{ alignItems: "center", marginTop: 20 }}>
         <SelectList
+          defaultOption={{ key: "1", value: "College" }}
+          search={false}
           setSelected={(val) => {
-            setFeedbackItem(val);
+            setFeedbackItem(data[val - 1]);
           }}
           data={data}
           boxStyles={{ width: 300, backgroundColor: "white" }}
@@ -58,6 +54,7 @@ const FeedbackSection2 = () => {
       <View>
         <Text style={[styles.textColor, styles.message]}>Message :</Text>
         <TextInput
+          value={message}
           multiline
           textAlignVertical="top"
           numberOfLines={10}
