@@ -67,7 +67,9 @@ export default function App() {
   const getData = async () => {
     const jsonValue = await AsyncStorage.getItem("user-pass");
     const value = JSON.parse(jsonValue);
-    setIsLoggedIn(value.isLoggedIn);
+    if (value) {
+      setIsLoggedIn(value.isLoggedIn);
+    }
   };
   getData();
 

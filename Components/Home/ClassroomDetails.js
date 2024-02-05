@@ -76,7 +76,7 @@ const ClassroomDetails = ({ user }) => {
             <View style={{ alignItems: "center" }}>
               <View style={styles.attendanceLine} />
             </View>
-            <Attendance />
+            <Attendance user={user} />
           </TouchableOpacity>
         </View>
 

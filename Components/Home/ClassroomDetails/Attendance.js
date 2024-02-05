@@ -2,11 +2,11 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as Progress from "react-native-progress";
 
-const Attendance = () => {
+const Attendance = ({ user }) => {
   const [attendance, setAttendance] = useState(0);
 
   useEffect(() => {
-    setAttendance(0.65);
+    setAttendance(user.attendance);
   }, []);
 
   return (
