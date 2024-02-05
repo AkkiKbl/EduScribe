@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-const ClassroomDetails = () => {
+const ClassroomDetails = ({ user }) => {
   const navigation = useNavigation();
   const [Totalinternship, setTotalinternship] = useState("");
 
@@ -17,8 +17,8 @@ const ClassroomDetails = () => {
     getInternTotal();
   }, []);
 
-  let deadlines = 2;
-  let department = "BCA";
+  let deadlines = user.deadlines;
+  let department = user.stream;
 
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>

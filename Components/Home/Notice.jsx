@@ -11,8 +11,6 @@ const Notice = () => {
     const getNotices = async () => {
       const querySnapshot = await getDocs(collection(db, "notices"));
 
-
-
       const data1 = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),

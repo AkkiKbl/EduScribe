@@ -6,6 +6,8 @@ import CanteenScreen from "./screens/CanteenScreen";
 import AcademicsScreen from "./screens/AcademicsScreen";
 import InternshipsScreen from "./screens/InternshipsScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -60,9 +62,18 @@ function LoginStackGroup() {
 }
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const getData = async () => {
+    const jsonValue = await AsyncStorage.getItem("user-pass");
+    const value = JSON.parse(jsonValue);
+    setIsLoggedIn(value.isLoggedIn);
+  };
+  getData();
+
   return (
     <NavigationContainer>
-      <LoginStackGroup />
+      {isLoggedIn ? <HomeStackGroup /> : <LoginStackGroup />}
     </NavigationContainer>
   );
 }

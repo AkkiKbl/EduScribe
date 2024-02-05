@@ -1,36 +1,29 @@
 import { useEffect, useState } from "react";
 import {
   View,
-  ScrollView,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
-  StatusBar,
 } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
-import { auth } from "../firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { ToastAndroid } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from "../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const LoginScreen = () => {
   //Save typed Username and Password
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const value = {
+    username: "",
+    password: "",
+    isLoggedIn: false,
+  };
 
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.navigate("HomeGroupStack"); //Navigate to HomeScreen if the user is already logged In
-      }
-    });
-    return unsubscribe;
-  }, []);
 
   //Load fonts
   let [fontsLoaded] = useFonts({
@@ -43,20 +36,40 @@ const LoginScreen = () => {
 
   //Handle OnClick Button
   const handleSignIn = () => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, userName, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        navigation.navigate("HomeGroupStack"); //Navigate to HomeScreen
-        ToastAndroid.show("Logged In", ToastAndroid.SHORT);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+    value.username = userName;
+    value.password = password;
 
-        ToastAndroid.show("Failed to Log In", ToastAndroid.SHORT);
-      });
+    //Store data in AsyncStorage
+    const storeData = async () => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem("user-pass", jsonValue);
+      } catch (e) {
+        // saving error
+      }
+    };
+
+    const signIn = async () => {
+      const q = query(
+        collection(db, "stud_users"),
+        where("rollNo", "==", value.username),
+        where("password", "==", value.password)
+      );
+      const userDoc = await getDocs(q);
+
+      const data1 = userDoc.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      if (data1) {
+        value.isLoggedIn = true;
+        storeData();
+        navigation.navigate("HomeGroupStack");
+      }
+    };
+
+    signIn();
   };
 
   return (

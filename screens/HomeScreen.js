@@ -9,11 +9,43 @@ import {
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import Notice from "../Components/Home/Notice";
 import WelcomeName from "../Components/Home/WelcomeName";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ClassroomDetails from "../Components/Home/ClassroomDetails";
 import ServiceCards from "../Components/Home/ServiceCards";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from "../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = () => {
+  const [userDetails, setUserDetails] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      const jsonValue = await AsyncStorage.getItem("user-pass");
+      const value = JSON.parse(jsonValue);
+
+      const fetchData = async () => {
+        const q = query(
+          collection(db, "stud_users"),
+          where("rollNo", "==", value.username),
+          where("password", "==", value.password)
+        );
+        const userDoc = await getDocs(q);
+
+        const data1 = userDoc.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setUserDetails(data1[0]);
+      };
+      fetchData();
+    };
+
+    getData();
+  }, []);
+
   //Load fonts
   let [fontsLoaded] = useFonts({
     Pacifico_400Regular,
@@ -22,20 +54,34 @@ const HomeScreen = () => {
   if (!fontsLoaded) {
     return null;
   }
-
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
-      <View>
-        <WelcomeName />
-        <Notice />
-        <ClassroomDetails />
-        <View style={{ alignItems: "center", marginRight: 20 }}>
-          <View style={styles.separator} />
-        </View>
-        <ServiceCards />
-      </View>
-    </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
+
+        {userDetails ? (
+          <View>
+            <WelcomeName user={userDetails} />
+            <Notice />
+            <ClassroomDetails user={userDetails} />
+            <View style={{ alignItems: "center", marginRight: 20 }}>
+              <View style={styles.separator} />
+            </View>
+            <ServiceCards />
+          </View>
+        ) : (
+          <View
+            style={{
+              height: 700,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "white" }}>Loading...</Text>
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -45,7 +91,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#474747",
-    color: "white",
   },
   welcome_1: {
     marginTop: 40,

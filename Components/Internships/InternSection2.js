@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
   internshipCards: {
     backgroundColor: "black",
     height: 150,
-    width: 400,
+    maxWidth: 400,
+    minWidth: 380,
     marginBottom: 10,
     borderRadius: 10,
   },
