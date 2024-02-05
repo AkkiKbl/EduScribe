@@ -5,11 +5,13 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { AppContext } from "../../context/AppContext";
 
-const InternSection2 = ({ user }) => {
+const InternSection2 = () => {
+  const user = useContext(AppContext);
   const [Internship, setInternship] = useState([]);
 
   useEffect(() => {

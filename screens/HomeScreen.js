@@ -1,44 +1,16 @@
-import { View, Text, StyleSheet, ScrollView, StatusBar } from "react-native";
+import { View, StyleSheet, ScrollView, StatusBar } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import Notice from "../Components/Home/Notice";
 import WelcomeName from "../Components/Home/WelcomeName";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import ClassroomDetails from "../Components/Home/ClassroomDetails";
 import ServiceCards from "../Components/Home/ServiceCards";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { db } from "../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Loading from "../Components/Loading";
+import { AppContext, AppProvider } from "../context/AppContext";
 
 const HomeScreen = () => {
-  const [userDetails, setUserDetails] = useState("");
-
-  useEffect(() => {
-    const getData = async () => {
-      const jsonValue = await AsyncStorage.getItem("user-pass");
-      const value = JSON.parse(jsonValue);
-
-      const fetchData = async () => {
-        const q = query(
-          collection(db, "stud_users"),
-          where("rollNo", "==", value.username),
-          where("password", "==", value.password)
-        );
-        const userDoc = await getDocs(q);
-
-        const data1 = userDoc.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setUserDetails(data1[0]);
-      };
-      fetchData();
-    };
-
-    getData();
-  }, []);
+  const userDetails = useContext(AppContext);
 
   //Load fonts
   let [fontsLoaded] = useFonts({

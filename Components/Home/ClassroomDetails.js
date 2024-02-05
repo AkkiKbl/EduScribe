@@ -5,15 +5,17 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Attendance from "./ClassroomDetails/Attendance";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { AppContext } from "../../context/AppContext";
 
-const ClassroomDetails = ({ user }) => {
+const ClassroomDetails = () => {
   const navigation = useNavigation();
   const [Totalinternship, setTotalinternship] = useState("");
+  const user = useContext(AppContext);
 
   useEffect(() => {
     const getInternTotal = async () => {
@@ -38,7 +40,7 @@ const ClassroomDetails = ({ user }) => {
           {/* Card 1 */}
           <TouchableOpacity
             style={styles.card1}
-            onPress={() => navigation.navigate("Internships", user)}
+            onPress={() => navigation.navigate("Internships")}
           >
             <Text
               style={{

@@ -3,14 +3,12 @@ import React from "react";
 import InternSection1 from "../Components/Internships/InternSection1";
 import InternSection2 from "../Components/Internships/InternSection2";
 
-const InternshipsScreen = ({ route }) => {
-  const user = route.params;
-
+const InternshipsScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View>
         <InternSection1 />
-        <InternSection2 user={user} />
+        <InternSection2 />
       </View>
     </ScrollView>
   );

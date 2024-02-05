@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Path, Svg } from "react-native-svg";
+import { AppContext } from "../../context/AppContext";
 
 const ClassroomSection1 = () => {
+  const userDetails = useContext(AppContext);
+
   return (
     <View style={styles.box1}>
       <View style={{ flexDirection: "row" }}>
@@ -29,9 +32,13 @@ const ClassroomSection1 = () => {
           </Svg>
         </View>
         <View style={{ justifyContent: "center", marginLeft: 5 }}>
-          <Text style={styles.userDetails}>Akshay Kubal</Text>
-          <Text style={styles.userDetails}>B-21-1320</Text>
-          <Text style={styles.userDetails}>Semester 6</Text>
+          <Text style={styles.userDetails}>
+            {userDetails.firstName} {userDetails.lastName}
+          </Text>
+          <Text style={styles.userDetails}>{userDetails.rollNo}</Text>
+          <Text style={styles.userDetails}>
+            Semester {userDetails.semester}
+          </Text>
         </View>
       </View>
       <View

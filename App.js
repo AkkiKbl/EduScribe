@@ -7,9 +7,11 @@ import AcademicsScreen from "./screens/AcademicsScreen";
 import InternshipsScreen from "./screens/InternshipsScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import ClassroomScreen from "./screens/ClassroomScreen";
 import StudyMaterial from "./screens/StudyMaterial";
+import { AppContext, AppProvider } from "./context/AppContext";
+import { Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -17,7 +19,7 @@ const ClassroomStack = createNativeStackNavigator();
 
 function ClassroomStackGroup() {
   return (
-    <ClassroomStack.Navigator initialRouteName="ClassroomScreen">
+    <ClassroomStack.Navigator initialRouteName="Classroom">
       <ClassroomStack.Screen
         options={{ headerShown: false }}
         name="Classroom"
@@ -87,20 +89,24 @@ function LoginStackGroup() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const getData = async () => {
+      const jsonValue = await AsyncStorage.getItem("user-pass");
+      value = JSON.parse(jsonValue);
+      if (value) {
+        setIsLoggedIn(value.isLoggedIn);
+      }
+    };
+    getData();
+  }, []);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getData = async () => {
-    const jsonValue = await AsyncStorage.getItem("user-pass");
-    const value = JSON.parse(jsonValue);
-    if (value) {
-      setIsLoggedIn(value.isLoggedIn);
-    }
-  };
-  getData();
-
   return (
-    <NavigationContainer>
-      {isLoggedIn ? <HomeStackGroup /> : <LoginStackGroup />}
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        {isLoggedIn ? <HomeStackGroup /> : <LoginStackGroup />}
+      </NavigationContainer>
+    </AppProvider>
   );
 }
