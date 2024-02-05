@@ -9,9 +9,28 @@ import FeedbackScreen from "./screens/FeedbackScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import ClassroomScreen from "./screens/ClassroomScreen";
+import StudyMaterial from "./screens/StudyMaterial";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
+const ClassroomStack = createNativeStackNavigator();
+
+function ClassroomStackGroup() {
+  return (
+    <ClassroomStack.Navigator initialRouteName="ClassroomScreen">
+      <ClassroomStack.Screen
+        options={{ headerShown: false }}
+        name="Classroom"
+        component={ClassroomScreen}
+      />
+      <ClassroomStack.Screen
+        options={{ headerShown: false }}
+        name="StudyMaterial"
+        component={StudyMaterial}
+      />
+    </ClassroomStack.Navigator>
+  );
+}
 
 function HomeStackGroup() {
   return (
@@ -43,8 +62,8 @@ function HomeStackGroup() {
       />
       <HomeStack.Screen
         options={{ headerShown: false }}
-        name="Classroom"
-        component={ClassroomScreen}
+        name="ClassroomGroupStack"
+        component={ClassroomStackGroup}
       />
     </HomeStack.Navigator>
   );
