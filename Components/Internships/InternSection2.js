@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-const InternSection2 = () => {
+const InternSection2 = ({ user }) => {
   const [Internship, setInternship] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,9 @@ const InternSection2 = () => {
   return (
     <View>
       <View style={{ alignItems: "center" }}>
-        <Text style={[styles.textColor, styles.headingText]}>BCA</Text>
+        <Text style={[styles.textColor, styles.headingText]}>
+          {user.stream}
+        </Text>
         <View style={styles.line} />
       </View>
       <View>

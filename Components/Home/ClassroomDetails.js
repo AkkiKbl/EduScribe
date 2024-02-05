@@ -32,7 +32,7 @@ const ClassroomDetails = ({ user }) => {
           {/* Card 1 */}
           <TouchableOpacity
             style={styles.card1}
-            onPress={() => navigation.navigate("Internships")}
+            onPress={() => navigation.navigate("Internships", user)}
           >
             <Text
               style={{
@@ -115,7 +115,10 @@ const ClassroomDetails = ({ user }) => {
         >
           {/* Card 4 */}
 
-          <TouchableOpacity style={styles.card4}>
+          <TouchableOpacity
+            style={styles.card4}
+            onPress={() => navigation.navigate("Classroom")}
+          >
             <Text
               style={{
                 color: "white",

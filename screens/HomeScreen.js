@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  StatusBar,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView, StatusBar } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import Notice from "../Components/Home/Notice";
 import WelcomeName from "../Components/Home/WelcomeName";
@@ -16,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Loading from "../Components/Loading";
 
 const HomeScreen = () => {
   const [userDetails, setUserDetails] = useState("");
@@ -56,10 +50,10 @@ const HomeScreen = () => {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
+      <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
 
-        {userDetails ? (
+      {userDetails ? (
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View>
             <WelcomeName user={userDetails} />
             <Notice />
@@ -69,18 +63,10 @@ const HomeScreen = () => {
             </View>
             <ServiceCards />
           </View>
-        ) : (
-          <View
-            style={{
-              height: 700,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "white" }}>Loading...</Text>
-          </View>
-        )}
-      </ScrollView>
+        </ScrollView>
+      ) : (
+        <Loading />
+      )}
     </SafeAreaView>
   );
 };
