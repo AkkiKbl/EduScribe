@@ -14,29 +14,32 @@ const AppProvider = ({ children }) => {
       const jsonValue = await AsyncStorage.getItem("user-pass");
       value = JSON.parse(jsonValue);
 
-      const fetchData = async () => {
-        const q = query(
-          collection(db, "stud_users"),
-          where("rollNo", "==", value.username),
-          where("password", "==", value.password)
-        );
+      if (value) {
+        const fetchData = async () => {
+          const q = query(
+            collection(db, "stud_users"),
+            where("rollNo", "==", value.username),
+            where("password", "==", value.password)
+          );
+          const userDoc = await getDocs(q);
 
-        const userDoc = await getDocs(q);
+          const data1 = userDoc.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
 
-        const data1 = userDoc.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setUserDetails(data1[0]);
-      };
-      fetchData();
+          setUserDetails(data1[0]);
+        };
+        fetchData();
+      }
     };
     getData();
   }, []);
 
   return (
-    <AppContext.Provider value={userDetails}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ userDetails, setUserDetails }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, StatusBar } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ClassroomSection1 from "../Components/Classroom/ClassroomSection1";
@@ -7,6 +7,7 @@ import ClassroomSection2 from "../Components/Classroom/ClassroomSection2";
 const ClassroomScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ClassroomSection1 />
         <ClassroomSection2 />

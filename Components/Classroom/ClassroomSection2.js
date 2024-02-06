@@ -11,7 +11,7 @@ const ClassroomSection2 = () => {
       <View style={styles.cards}>
         <TouchableOpacity
           style={styles.card}
-          onPress={() => navigation.navigate("StudyMaterial")}
+          onPress={() => navigation.navigate("StudyMaterialGroupStack")}
         >
           <Svg
             width="120px"

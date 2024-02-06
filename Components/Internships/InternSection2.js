@@ -11,7 +11,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { AppContext } from "../../context/AppContext";
 
 const InternSection2 = () => {
-  const user = useContext(AppContext);
+  const { userDetails, setUserDetails } = useContext(AppContext);
   const [Internship, setInternship] = useState([]);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const InternSection2 = () => {
     <View>
       <View style={{ alignItems: "center" }}>
         <Text style={[styles.textColor, styles.headingText]}>
-          {user.stream}
+          {userDetails.stream}
         </Text>
         <View style={styles.line} />
       </View>

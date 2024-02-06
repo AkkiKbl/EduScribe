@@ -12,10 +12,9 @@ import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { AppContext } from "../../context/AppContext";
 
-const ClassroomDetails = () => {
+const ClassroomDetails = ({ user }) => {
   const navigation = useNavigation();
   const [Totalinternship, setTotalinternship] = useState("");
-  const user = useContext(AppContext);
 
   useEffect(() => {
     const getInternTotal = async () => {

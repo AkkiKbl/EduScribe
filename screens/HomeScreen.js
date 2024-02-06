@@ -10,7 +10,7 @@ import Loading from "../Components/Loading";
 import { AppContext, AppProvider } from "../context/AppContext";
 
 const HomeScreen = () => {
-  const userDetails = useContext(AppContext);
+  const { userDetails, setUserDetails } = useContext(AppContext);
 
   //Load fonts
   let [fontsLoaded] = useFonts({

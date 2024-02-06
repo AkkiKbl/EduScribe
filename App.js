@@ -7,15 +7,33 @@ import AcademicsScreen from "./screens/AcademicsScreen";
 import InternshipsScreen from "./screens/InternshipsScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ClassroomScreen from "./screens/ClassroomScreen";
 import StudyMaterial from "./screens/StudyMaterial";
-import { AppContext, AppProvider } from "./context/AppContext";
-import { Text } from "react-native";
+import { AppProvider } from "./context/AppContext";
+import StudyMaterialCourse from "./Components/StudyMaterial/StudyMaterialCourse";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
 const ClassroomStack = createNativeStackNavigator();
+const StudyMaterialStack = createNativeStackNavigator();
+
+function StudyMaterialStackGroup() {
+  return (
+    <StudyMaterialStack.Navigator initialRouteName="StudyMaterial">
+      <StudyMaterialStack.Screen
+        options={{ headerShown: false }}
+        name="StudyMaterial"
+        component={StudyMaterial}
+      />
+      <StudyMaterialStack.Screen
+        options={{ headerShown: false }}
+        name="StudyMaterialCourse"
+        component={StudyMaterialCourse}
+      />
+    </StudyMaterialStack.Navigator>
+  );
+}
 
 function ClassroomStackGroup() {
   return (
@@ -27,8 +45,8 @@ function ClassroomStackGroup() {
       />
       <ClassroomStack.Screen
         options={{ headerShown: false }}
-        name="StudyMaterial"
-        component={StudyMaterial}
+        name="StudyMaterialGroupStack"
+        component={StudyMaterialStackGroup}
       />
     </ClassroomStack.Navigator>
   );

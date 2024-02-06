@@ -1,11 +1,13 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import StudySection1 from "../Components/StudyMaterial/StudySection1";
 
 const StudyMaterial = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Test</Text>
+      <StatusBar backgroundColor={"#474747"} barStyle={"light-content"} />
+      <StudySection1 />
     </SafeAreaView>
   );
 };

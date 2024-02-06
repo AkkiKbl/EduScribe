@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -12,9 +12,12 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { AppContext } from "../context/AppContext";
 
 const LoginScreen = () => {
   //Save typed Username and Password
+  const { userDetails, setUserDetails } = useContext(AppContext);
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const value = {
@@ -61,6 +64,8 @@ const LoginScreen = () => {
         id: doc.id,
         ...doc.data(),
       }));
+
+      setUserDetails(data1[0]);
 
       if (data1) {
         value.isLoggedIn = true;

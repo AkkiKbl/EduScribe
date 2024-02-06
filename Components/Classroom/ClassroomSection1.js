@@ -4,7 +4,7 @@ import { Path, Svg } from "react-native-svg";
 import { AppContext } from "../../context/AppContext";
 
 const ClassroomSection1 = () => {
-  const userDetails = useContext(AppContext);
+  const { userDetails, setUserDetails } = useContext(AppContext);
 
   return (
     <View style={styles.box1}>
