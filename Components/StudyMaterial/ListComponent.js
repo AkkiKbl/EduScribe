@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const StudyMaterialNotes = () => {
+const ListComponent = () => {
   return (
     <View>
-      <Text>StudyMaterialNotes</Text>
+      <Text>ListComponent</Text>
     </View>
   );
 };
 
-export default StudyMaterialNotes;
+export default ListComponent;

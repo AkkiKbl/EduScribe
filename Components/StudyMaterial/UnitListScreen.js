@@ -1,27 +1,27 @@
 import {
   View,
   Text,
+  StyleSheet,
   FlatList,
   TouchableOpacity,
-  StyleSheet,
-  Linking,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase";
+import { listAll, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
-const DownloadListScreen = (file) => {
-  const filePath = file.route.params;
-  const [downloadList, setdownloadList] = useState([]);
-  let data = [];
+const UnitListScreen = (classRoute) => {
+  const filePath = classRoute.route.params;
+  const navigation = useNavigation();
 
+  const [data, setData] = useState([]);
+  let data1 = [];
   const listRef = ref(
     storage,
     `gs://eduscribe-college.appspot.com/${filePath}`
   );
 
-  //Fetch List Files
   useEffect(() => {
     const fetchData = async () => {
       await listAll(listRef)
@@ -29,12 +29,13 @@ const DownloadListScreen = (file) => {
           res.prefixes.forEach((folderRef) => {
             // All the prefixes under listRef.
             // You may call listAll() recursively on them.
+            data1.push(folderRef.name);
           });
           res.items.forEach((itemRef) => {
             // All the items under listRef.
-            data.push(itemRef.name);
           });
-          setdownloadList(data);
+
+          setData(data1);
         })
 
         .catch((error) => {
@@ -43,36 +44,11 @@ const DownloadListScreen = (file) => {
     };
     fetchData();
   }, []);
-  // const fileUri =
-  //   FileSystem.documentDirectory + "Addressing mode and format.ppt";
-  // const fileName = "Addressing mode and format.ppt";
 
-  //Download File
-  const downloadFunction = (fileName) => {
-    getDownloadURL(ref(storage, filePath + "/" + fileName))
-      .then((url) => {
-        // `url` is the download URL for 'images/stars.jpg'
-        Linking.openURL(url);
-
-        // const result = FileSystem.downloadAsync(url, fileUri);
-
-        // This can be downloaded directly:
-        // const xhr = new XMLHttpRequest();
-        // xhr.responseType = "blob";
-        // xhr.onload = (event) => {
-        //   const blob = xhr.response;
-        // };
-        // xhr.open("GET", url);
-        // xhr.send();
-
-        // Or inserted into an <img> element
-        // const img = document.getElementById("myimg");
-        // img.setAttribute("src", url);
-      })
-      .catch((error) => {
-        // Handle any errors
-      });
-  };
+  function navigateScreen(path) {
+    const fileUri = filePath + "/" + path;
+    navigation.navigate("DownloadListScreen", fileUri);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,19 +59,19 @@ const DownloadListScreen = (file) => {
             { fontSize: 30, fontWeight: "600", marginTop: 20 },
           ]}
         >
-          Files
+          Units
         </Text>
       </View>
       <View style={{ alignItems: "center" }}>
         <View style={styles.line} />
       </View>
       <FlatList
-        data={downloadList}
+        data={data}
         renderItem={({ item }) => (
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
               style={styles.buttonView}
-              onPress={() => downloadFunction(item)}
+              onPress={() => navigateScreen(item)}
             >
               <View style={styles.button}>
                 <Text
@@ -115,7 +91,7 @@ const DownloadListScreen = (file) => {
   );
 };
 
-export default DownloadListScreen;
+export default UnitListScreen;
 
 const styles = StyleSheet.create({
   container: {

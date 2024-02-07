@@ -12,15 +12,27 @@ const StudySection1 = () => {
   const navigation = useNavigation();
 
   function navigateScreen(screen) {
-    // console.log(studySubject);
     navigation.navigate("StudyCourseStackGroup", {
-      screen: "StudyMaterialCourse",
+      screen: "SemesterScreen",
       params: { data: screen },
     });
   }
 
   return (
     <View>
+      <View style={{ alignItems: "center" }}>
+        <Text
+          style={[
+            styles.textColor,
+            { fontSize: 30, fontWeight: "600", marginTop: 20 },
+          ]}
+        >
+          Class
+        </Text>
+      </View>
+      <View style={{ alignItems: "center" }}>
+        <View style={styles.line} />
+      </View>
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.button}
@@ -49,14 +61,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
-    marginTop: 50,
+    marginTop: 20,
   },
   buttonView: {
     alignItems: "center",
-    marginTop: 50,
   },
   textColor: {
     color: "white",
   },
   textStyle: { fontSize: 22, fontWeight: "600" },
+  line: {
+    backgroundColor: "white",
+    width: 180,
+    height: 1,
+    marginBottom: 20,
+  },
 });

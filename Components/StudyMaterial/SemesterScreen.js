@@ -5,18 +5,21 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { storage } from "../../firebase";
 import { ref, listAll } from "firebase/storage";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const StudyMaterialList = (routes) => {
+const SemesterScreen = () => {
   const navigation = useNavigation();
-  const fileUrl = routes.route.params;
+  const route = useRoute();
+  const filePath = route.params.data;
 
-  const listRef = ref(storage, `gs://eduscribe-college.appspot.com/${fileUrl}`);
+  const listRef = ref(
+    storage,
+    `gs://eduscribe-college.appspot.com/${filePath}`
+  );
   let data = [];
   const [folders, setFolders] = useState([]);
   useEffect(() => {
@@ -42,9 +45,10 @@ const StudyMaterialList = (routes) => {
     fetchData();
   }, []);
 
-  function navigateScreen(course) {
-    const filePath = fileUrl + "/" + course;
-    navigation.navigate("UnitListScreen", filePath);
+  function navigateScreen(unit) {
+    const fileUri = filePath + "/" + unit;
+
+    navigation.navigate("StudyMaterialCourse", fileUri);
   }
 
   return (
@@ -56,13 +60,13 @@ const StudyMaterialList = (routes) => {
             { fontSize: 30, fontWeight: "600", marginTop: 20 },
           ]}
         >
-          Subjects
+          Semester
         </Text>
       </View>
       <View style={{ alignItems: "center" }}>
         <View style={styles.line} />
       </View>
-      <View>
+      <View style={{ marginTop: 10 }}>
         <FlatList
           data={folders}
           renderItem={({ item }) => (
@@ -80,7 +84,7 @@ const StudyMaterialList = (routes) => {
   );
 };
 
-export default StudyMaterialList;
+export default SemesterScreen;
 
 const styles = StyleSheet.create({
   container: {

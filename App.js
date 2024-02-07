@@ -14,6 +14,8 @@ import { AppProvider } from "./context/AppContext";
 import StudyMaterialCourse from "./Components/StudyMaterial/StudyMaterialCourse";
 import StudyMaterialList from "./Components/StudyMaterial/StudyMaterialCourse";
 import DownloadListScreen from "./screens/DownloadListScreen";
+import UnitListScreen from "./Components/StudyMaterial/UnitListScreen";
+import SemesterScreen from "./Components/StudyMaterial/SemesterScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -40,7 +42,7 @@ function StudyMaterialStackGroup() {
 
 function StudyCourseStackGroup() {
   return (
-    <StudyCourseStack.Navigator initialRouteName="StudyMaterialCourse">
+    <StudyCourseStack.Navigator initialRouteName="SemesterScreen">
       <StudyCourseStack.Screen
         options={{ headerShown: false }}
         name="StudyMaterialCourse"
@@ -55,6 +57,16 @@ function StudyCourseStackGroup() {
         options={{ headerShown: false }}
         name="DownloadListScreen"
         component={DownloadListScreen}
+      />
+      <StudyCourseStack.Screen
+        options={{ headerShown: false }}
+        name="UnitListScreen"
+        component={UnitListScreen}
+      />
+      <StudyCourseStack.Screen
+        options={{ headerShown: false }}
+        name="SemesterScreen"
+        component={SemesterScreen}
       />
     </StudyCourseStack.Navigator>
   );
