@@ -12,8 +12,7 @@ import { ref, listAll } from "firebase/storage";
 
 const StudyMaterialList = (props) => {
   const directory = props.route.params;
-  // console.log(routes);
-  console.log(directory);
+
   const listRef = ref(
     storage,
     `gs://eduscribe-college.appspot.com/${directory}`
@@ -25,15 +24,19 @@ const StudyMaterialList = (props) => {
       await listAll(listRef)
         .then((res) => {
           res.prefixes.forEach((folderRef) => {
-            // console.log(folderRef.fullPath);
-            data.push(folderRef.fullPath);
+            data.push(folderRef.fullPath.split("/"));
+
             // All the prefixes under listRef.
             // You may call listAll() recursively on them.
           });
           res.items.forEach((itemRef) => {
             // All the items under listRef.
           });
+          data.forEach((element, index) => {
+            data[index] = element[1];
+          });
         })
+
         .catch((error) => {
           // Uh-oh, an error occurred!
         });
@@ -41,8 +44,6 @@ const StudyMaterialList = (props) => {
     };
     fetchData();
   }, []);
-
-  const Data = ["First Item", "Second Item"];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,7 +53,9 @@ const StudyMaterialList = (props) => {
           renderItem={({ item }) => (
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity>
-                <Text style={styles.textColor}>{item}</Text>
+                <View style={styles.button}>
+                  <Text style={styles.textColor}>{item}</Text>
+                </View>
               </TouchableOpacity>
             </View>
           )}
@@ -70,7 +73,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#474747",
   },
   textColor: {
-    color: "blue",
-    textDecorationLine: "underline",
+    color: "white",
+    fontWeight: "700",
+    fontSize: 24,
+  },
+  button: {
+    backgroundColor: "black",
+    height: 60,
+    width: 240,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
   },
 });
