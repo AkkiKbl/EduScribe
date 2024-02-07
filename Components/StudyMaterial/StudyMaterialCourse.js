@@ -5,17 +5,21 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { storage } from "../../firebase";
 import { ref, listAll } from "firebase/storage";
+import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-const StudyMaterialList = (props) => {
-  const directory = props.route.params;
+const StudyMaterialList = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const studyClass = route.params.data;
 
   const listRef = ref(
     storage,
-    `gs://eduscribe-college.appspot.com/${directory}`
+    `gs://eduscribe-college.appspot.com/${studyClass}`
   );
   let data = [];
   const [folders, setFolders] = useState([]);
@@ -45,6 +49,10 @@ const StudyMaterialList = (props) => {
     fetchData();
   }, []);
 
+  function navigateScreen(course) {
+    navigation.navigate("DownloadListScreen");
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginTop: 40 }}>
@@ -52,7 +60,7 @@ const StudyMaterialList = (props) => {
           data={folders}
           renderItem={({ item }) => (
             <View style={{ alignItems: "center" }}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigateScreen(item)}>
                 <View style={styles.button}>
                   <Text style={styles.textColor}>{item}</Text>
                 </View>

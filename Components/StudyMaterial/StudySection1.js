@@ -5,17 +5,26 @@ import {
   TouchableOpacity,
   Touchable,
 } from "react-native";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const StudySection1 = () => {
   const navigation = useNavigation();
+
+  function navigateScreen(screen) {
+    // console.log(studySubject);
+    navigation.navigate("StudyCourseStackGroup", {
+      screen: "StudyMaterialCourse",
+      params: { data: screen },
+    });
+  }
+
   return (
     <View>
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("StudyMaterialCourse", "FYBCA")}
+          onPress={() => navigateScreen("FYBCA")}
         >
           <Text style={[styles.textColor, styles.textStyle]}>FYBCA</Text>
         </TouchableOpacity>

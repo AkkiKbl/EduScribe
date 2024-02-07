@@ -12,11 +12,14 @@ import ClassroomScreen from "./screens/ClassroomScreen";
 import StudyMaterial from "./screens/StudyMaterial";
 import { AppProvider } from "./context/AppContext";
 import StudyMaterialCourse from "./Components/StudyMaterial/StudyMaterialCourse";
+import StudyMaterialList from "./Components/StudyMaterial/StudyMaterialCourse";
+import DownloadListScreen from "./screens/DownloadListScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
 const ClassroomStack = createNativeStackNavigator();
 const StudyMaterialStack = createNativeStackNavigator();
+const StudyCourseStack = createNativeStackNavigator();
 
 function StudyMaterialStackGroup() {
   return (
@@ -28,10 +31,32 @@ function StudyMaterialStackGroup() {
       />
       <StudyMaterialStack.Screen
         options={{ headerShown: false }}
+        name="StudyCourseStackGroup"
+        component={StudyCourseStackGroup}
+      />
+    </StudyMaterialStack.Navigator>
+  );
+}
+
+function StudyCourseStackGroup() {
+  return (
+    <StudyCourseStack.Navigator initialRouteName="StudyMaterialCourse">
+      <StudyCourseStack.Screen
+        options={{ headerShown: false }}
         name="StudyMaterialCourse"
         component={StudyMaterialCourse}
       />
-    </StudyMaterialStack.Navigator>
+      <StudyCourseStack.Screen
+        options={{ headerShown: false }}
+        name="StudyMaterialList"
+        component={StudyMaterialList}
+      />
+      <StudyCourseStack.Screen
+        options={{ headerShown: false }}
+        name="DownloadListScreen"
+        component={DownloadListScreen}
+      />
+    </StudyCourseStack.Navigator>
   );
 }
 
