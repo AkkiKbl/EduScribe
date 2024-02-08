@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "EduScribe2",
-    "slug": "EduScribe2",
+    "name": "EduScribe",
+    "slug": "EduScribe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.akki_assassin.EduScribe2"
+      "package": "com.college.EduScribe"
     },
     "web": {
       "favicon": "./assets/favicon.png"

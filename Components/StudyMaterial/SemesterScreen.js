@@ -53,6 +53,9 @@ const SemesterScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{ marginLeft: 20, marginTop: 20 }}>
+        <Text style={{ color: "white" }}>/{filePath}</Text>
+      </View>
       <View style={{ alignItems: "center" }}>
         <Text
           style={[
