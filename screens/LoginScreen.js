@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -70,7 +70,8 @@ const LoginScreen = () => {
       if (data1) {
         value.isLoggedIn = true;
         storeData();
-        navigation.navigate("HomeGroupStack");
+        // navigation.navigate("HomeGroupStack");
+        navigation.dispatch(StackActions.replace("HomeGroupStack"));
       }
     };
 

@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const ListComponent = () => {
+const NoticeSection1 = (value) => {
   return (
     <View>
-      <Text>ListComponent</Text>
+      <Text>{value}</Text>
     </View>
   );
 };
 
-export default ListComponent;
+export default NoticeSection1;

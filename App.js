@@ -16,6 +16,7 @@ import StudyMaterialList from "./Components/StudyMaterial/StudyMaterialCourse";
 import DownloadListScreen from "./screens/DownloadListScreen";
 import UnitListScreen from "./Components/StudyMaterial/UnitListScreen";
 import SemesterScreen from "./Components/StudyMaterial/SemesterScreen";
+import NoticeScreen from "./screens/NoticeScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -121,6 +122,16 @@ function HomeStackGroup() {
         options={{ headerShown: false }}
         name="ClassroomGroupStack"
         component={ClassroomStackGroup}
+      />
+      <HomeStack.Screen
+        options={{ headerShown: false }}
+        name="Notices"
+        component={NoticeScreen}
+      />
+      <HomeStack.Screen
+        options={{ headerShown: false }}
+        name="LoginGroupStack"
+        component={LoginStackGroup}
       />
     </HomeStack.Navigator>
   );

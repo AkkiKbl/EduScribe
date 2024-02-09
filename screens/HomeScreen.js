@@ -1,4 +1,11 @@
-import { View, StyleSheet, ScrollView, StatusBar } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import Notice from "../Components/Home/Notice";
 import WelcomeName from "../Components/Home/WelcomeName";
@@ -8,9 +15,12 @@ import ServiceCards from "../Components/Home/ServiceCards";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Loading from "../Components/Loading";
 import { AppContext, AppProvider } from "../context/AppContext";
+import { StackActions, useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = () => {
   const { userDetails, setUserDetails } = useContext(AppContext);
+  const navigation = useNavigation();
 
   //Load fonts
   let [fontsLoaded] = useFonts({
@@ -20,6 +30,16 @@ const HomeScreen = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  function LogoutFunction() {
+    //Store data in AsyncStorage
+    const storeData = async () => {
+      await AsyncStorage.removeItem("user-pass");
+    };
+    storeData();
+    navigation.dispatch(StackActions.replace("LoginGroupStack"));
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={"#474747"} />
@@ -35,6 +55,16 @@ const HomeScreen = () => {
             </View>
             <ServiceCards />
           </View>
+          <TouchableOpacity
+            style={{ alignItems: "center" }}
+            onPress={LogoutFunction}
+          >
+            <View style={styles.button}>
+              <Text style={{ color: "white", fontSize: 18, fontWeight: "600" }}>
+                LOGOUT
+              </Text>
+            </View>
+          </TouchableOpacity>
         </ScrollView>
       ) : (
         <Loading />
@@ -65,5 +95,15 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: 20,
     opacity: 0.5,
+  },
+  button: {
+    backgroundColor: "#A52A2A",
+    width: "70%",
+    height: 50,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
