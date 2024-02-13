@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, StatusBar } from "react-native";
-import React, { useContext } from "react";
+import { StyleSheet, ScrollView, StatusBar } from "react-native";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ClassroomSection1 from "../Components/Classroom/ClassroomSection1";
 import ClassroomSection2 from "../Components/Classroom/ClassroomSection2";

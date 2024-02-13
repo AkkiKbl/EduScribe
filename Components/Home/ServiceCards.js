@@ -51,7 +51,7 @@ const ServiceCards = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.card2, styles.cards]}
-          onPress={() => navigation.navigate("Canteen")}
+          onPress={() => navigation.navigate("CanteenGroupStack")}
         >
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}

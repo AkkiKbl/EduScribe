@@ -5,6 +5,7 @@ import {
   Image,
   StatusBar,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,11 +16,8 @@ const CanteenScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#2F2F2F" />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Section_1 />
-        <Section_2 />
-        <CanteenMeal />
-      </ScrollView>
+
+      <CanteenMeal />
     </SafeAreaView>
   );
 };

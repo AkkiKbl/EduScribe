@@ -4,15 +4,23 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ScrollView,
+  Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import FoodItems from "../../../resources/CanteenMenu";
+import Section_1 from "../Section_1";
+import Section_2 from "../Section_2";
+import { useNavigation } from "@react-navigation/native";
 
 const Canteen_menu = () => {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
   const [data4, setData4] = useState([]);
+  const navigation = useNavigation();
+
+  let cart = [];
 
   //Store fetched Data
   useEffect(() => {
@@ -70,6 +78,25 @@ const Canteen_menu = () => {
       });
     });
   }, []);
+
+  function navigateToPayment() {
+    cart = [];
+    data1.forEach((item) => {
+      if (item.isSelected) cart.push(item);
+    });
+    data2.forEach((item) => {
+      if (item.isSelected) cart.push(item);
+    });
+    data3.forEach((item) => {
+      if (item.isSelected) cart.push(item);
+    });
+    data4.forEach((item) => {
+      if (item.isSelected) cart.push(item);
+    });
+    // console.log(cart);
+
+    navigation.navigate("CartScreen", cart);
+  }
 
   //Re-Render List Function
   function reRender(tag) {
@@ -142,7 +169,6 @@ const Canteen_menu = () => {
       data1.forEach((item) => {
         if (item.id === id) {
           item.quantity++;
-          console.log(item.quantity);
         }
       });
     } else if (tag === "Snacks") {
@@ -231,26 +257,25 @@ const Canteen_menu = () => {
                       <View
                         style={{
                           flexDirection: "row",
-                          justifyContent: "space-evenly",
                         }}
                       >
                         <Text
-                          style={{ fontSize: 18 }}
+                          style={styles.decreaseQuantity}
                           onPress={() => decreQuantity(item.id, item.tag)}
                         >
                           -
                         </Text>
+                        <View style={styles.quantityView}>
+                          <Text
+                            style={{
+                              fontSize: 18,
+                            }}
+                          >
+                            {item.quantity}
+                          </Text>
+                        </View>
                         <Text
-                          style={{
-                            marginLeft: 16,
-                            marginRight: 16,
-                            fontSize: 18,
-                          }}
-                        >
-                          {item.quantity}
-                        </Text>
-                        <Text
-                          style={{ fontSize: 18 }}
+                          style={styles.increaseQuantity}
                           onPress={() => increQuantity(item.id, item.tag)}
                         >
                           +
@@ -301,7 +326,7 @@ const Canteen_menu = () => {
               <View style={styles.cards}>
                 <View>
                   {item.isSelected ? (
-                    <TouchableOpacity style={styles.menuButton}>
+                    <View style={styles.menuButton}>
                       <View
                         style={{
                           flexDirection: "row",
@@ -309,28 +334,28 @@ const Canteen_menu = () => {
                         }}
                       >
                         <Text
-                          style={{ fontSize: 18 }}
+                          style={styles.decreaseQuantity}
                           onPress={() => decreQuantity(item.id, item.tag)}
                         >
                           -
                         </Text>
+                        <View style={styles.quantityView}>
+                          <Text
+                            style={{
+                              fontSize: 18,
+                            }}
+                          >
+                            {item.quantity}
+                          </Text>
+                        </View>
                         <Text
-                          style={{
-                            marginLeft: 16,
-                            marginRight: 16,
-                            fontSize: 18,
-                          }}
-                        >
-                          {item.quantity}
-                        </Text>
-                        <Text
-                          style={{ fontSize: 18 }}
+                          style={styles.increaseQuantity}
                           onPress={() => increQuantity(item.id, item.tag)}
                         >
                           +
                         </Text>
                       </View>
-                    </TouchableOpacity>
+                    </View>
                   ) : (
                     <TouchableOpacity
                       style={styles.menuButton}
@@ -383,22 +408,95 @@ const Canteen_menu = () => {
                         }}
                       >
                         <Text
-                          style={{ fontSize: 18 }}
+                          style={styles.decreaseQuantity}
                           onPress={() => decreQuantity(item.id, item.tag)}
                         >
                           -
                         </Text>
+                        <View style={styles.quantityView}>
+                          <Text
+                            style={{
+                              fontSize: 18,
+                            }}
+                          >
+                            {item.quantity}
+                          </Text>
+                        </View>
                         <Text
-                          style={{
-                            marginLeft: 16,
-                            marginRight: 16,
-                            fontSize: 18,
-                          }}
+                          style={styles.increaseQuantity}
+                          onPress={() => increQuantity(item.id, item.tag)}
                         >
-                          {item.quantity}
+                          +
                         </Text>
+                      </View>
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      style={styles.menuButton}
+                      onPress={() => onClickAdd(item.id, item.tag)}
+                    >
+                      <Text style={styles.addButtonText}>Add</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+                <Text style={styles.textColor}>Rs.{item.price}</Text>
+                <Text style={styles.textColor}>{item.foodItem}</Text>
+                <View style={styles.line} />
+              </View>
+            )}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  function RenderFlatlist4() {
+    return (
+      <View>
+        <View style={styles.titleText}>
+          <Text style={styles.TextColor}>Extras</Text>
+          <View style={styles.line} />
+        </View>
+        <View
+          style={{
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <FlatList
+            numColumns={"2"}
+            scrollEnabled={false}
+            keyExtractor={(item) => item.id}
+            data={data4}
+            extraData={data4}
+            renderItem={({ item }) => (
+              <View style={styles.cards}>
+                <View>
+                  {item.isSelected ? (
+                    <TouchableOpacity style={styles.menuButton}>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-evenly",
+                        }}
+                      >
                         <Text
-                          style={{ fontSize: 18 }}
+                          style={styles.decreaseQuantity}
+                          onPress={() => decreQuantity(item.id, item.tag)}
+                        >
+                          -
+                        </Text>
+                        <View style={styles.quantityView}>
+                          <Text
+                            style={{
+                              fontSize: 18,
+                            }}
+                          >
+                            {item.quantity}
+                          </Text>
+                        </View>
+                        <Text
+                          style={styles.increaseQuantity}
                           onPress={() => increQuantity(item.id, item.tag)}
                         >
                           +
@@ -427,10 +525,31 @@ const Canteen_menu = () => {
 
   return (
     <View>
-      <RenderFlatlist1 />
-      <RenderFlatlist2 />
-      <RenderFlatlist3 />
-      <View style={{ justifyContent: "space-around" }}></View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Section_1 />
+        <Section_2 />
+        <RenderFlatlist1 />
+        <RenderFlatlist2 />
+        <RenderFlatlist3 />
+        <RenderFlatlist4 />
+      </ScrollView>
+      <View style={{ position: "absolute", bottom: 20, right: 20 }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            width: 70,
+            height: 70,
+            borderRadius: 40,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={() => {
+            navigateToPayment();
+          }}
+        >
+          <Text style={{ color: "black", fontSize: 20 }}>Cart</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -480,5 +599,19 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 1,
     marginBottom: 5,
+  },
+  quantityView: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  decreaseQuantity: {
+    fontSize: 18,
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  increaseQuantity: {
+    fontSize: 18,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 });
