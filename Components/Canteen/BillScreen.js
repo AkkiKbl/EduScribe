@@ -15,7 +15,6 @@ const BillScreen = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      // console.log(data1[0].ordered);
       setdata(data1);
     };
 

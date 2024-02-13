@@ -80,57 +80,67 @@ const CartDisplay = (routes) => {
     <View>
       <View style={{ alignItems: "center", marginBottom: 20, marginTop: 20 }}>
         <Text style={{ fontSize: 40, fontWeight: "600" }}>Cart</Text>
+        <View style={styles.line} />
       </View>
-      <View style={{ justifyContent: "space-around" }}>
-        <DataTable>
-          <DataTable.Row>
-            <DataTable.Title style={{ justifyContent: "center" }}>
-              Item
-            </DataTable.Title>
-            <DataTable.Title style={{ justifyContent: "center" }}>
-              Quanity
-            </DataTable.Title>
-            <DataTable.Title style={{ justifyContent: "center" }}>
-              Price
-            </DataTable.Title>
-          </DataTable.Row>
-        </DataTable>
+      {Object.keys(cart).length ? (
+        <View>
+          <View style={{ justifyContent: "space-around" }}>
+            <DataTable>
+              <DataTable.Row>
+                <DataTable.Title style={{ justifyContent: "center" }}>
+                  Item
+                </DataTable.Title>
+                <DataTable.Title style={{ justifyContent: "center" }}>
+                  Quanity
+                </DataTable.Title>
+                <DataTable.Title style={{ justifyContent: "center" }}>
+                  Price
+                </DataTable.Title>
+              </DataTable.Row>
+            </DataTable>
 
-        <FlatList
-          data={cart}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View>
-              <DataTable>
-                <DataTable.Row>
-                  <DataTable.Cell style={{ justifyContent: "center" }}>
-                    {item.foodItem}
-                  </DataTable.Cell>
-                  <DataTable.Cell style={{ justifyContent: "center" }}>
-                    {item.quantity}
-                  </DataTable.Cell>
-                  <DataTable.Cell style={{ justifyContent: "center" }}>
-                    {item.price}
-                  </DataTable.Cell>
-                </DataTable.Row>
-              </DataTable>
-            </View>
-          )}
-        />
-      </View>
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        <Text>Total </Text>
-        <Text>{totalPrice}</Text>
-      </View>
-
-      <View style={{ alignItems: "center", marginTop: 100 }}>
-        <TouchableOpacity style={styles.button} onPress={() => onPay()}>
-          <Text style={{ color: "white" }}>Place Order</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ alignItems: "center", marginTop: 10 }}>
-        <Text>Note: Only UPI payments are accepted</Text>
-      </View>
+            <FlatList
+              data={cart}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <View>
+                  <DataTable>
+                    <DataTable.Row>
+                      <DataTable.Cell style={{ justifyContent: "center" }}>
+                        {item.foodItem}
+                      </DataTable.Cell>
+                      <DataTable.Cell style={{ justifyContent: "center" }}>
+                        {item.quantity}
+                      </DataTable.Cell>
+                      <DataTable.Cell style={{ justifyContent: "center" }}>
+                        {item.price}
+                      </DataTable.Cell>
+                    </DataTable.Row>
+                  </DataTable>
+                </View>
+              )}
+            />
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-around" }}
+          >
+            <Text>Total </Text>
+            <Text>{totalPrice}</Text>
+          </View>
+          <View style={{ alignItems: "center", marginTop: 100 }}>
+            <TouchableOpacity style={styles.button} onPress={() => onPay()}>
+              <Text style={{ color: "white" }}>Place Order</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ alignItems: "center", marginTop: 10 }}>
+            <Text>Note: Only UPI payments are accepted</Text>
+          </View>
+        </View>
+      ) : (
+        <View style={{ alignItems: "center" }}>
+          <Text>Your cart is empty</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -145,5 +155,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
+  },
+  line: {
+    backgroundColor: "black",
+    width: "70%",
+    height: 2,
+    marginTop: 5,
   },
 });

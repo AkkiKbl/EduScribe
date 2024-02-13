@@ -1,16 +1,25 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/core";
 
 const Acad_Section2 = () => {
+  const navigation = useNavigation();
+
   return (
     <View>
       <View style={styles.perLineCards}>
-        <View style={styles.cards}>
+        <TouchableOpacity
+          style={styles.cards}
+          onPress={() => navigation.navigate("ResultClass")}
+        >
           <Text style={styles.textColor}>Results</Text>
-        </View>
-        <View style={styles.cards}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.cards}
+          onPress={() => navigation.navigate("TimeTableClass")}
+        >
           <Text style={styles.textColor}>Time-Table</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.perLineCards}>
         <View style={styles.cards}>
@@ -34,12 +43,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "column-reverse",
     alignItems: "center",
+    marginBottom: 10,
+    marginTop: 20,
   },
 
   perLineCards: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 30,
   },
   textColor: {
     color: "white",

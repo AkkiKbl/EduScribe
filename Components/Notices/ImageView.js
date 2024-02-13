@@ -13,7 +13,8 @@ const ImageView = (routes) => {
         <Image
           style={{
             width: "100%",
-            height: 300,
+            height: "100%",
+            resizeMode: "contain",
           }}
           source={{
             uri: data.url,

@@ -25,7 +25,7 @@ const ServiceCards = () => {
       >
         <TouchableOpacity
           style={[styles.card1, styles.cards]}
-          onPress={() => navigation.navigate("Academics")}
+          onPress={() => navigation.navigate("AcademicsGroupStack")}
         >
           <Text
             style={{ color: "white", textAlign: "center", marginBottom: 10 }}

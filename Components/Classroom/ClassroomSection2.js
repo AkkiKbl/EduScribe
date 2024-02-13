@@ -33,7 +33,10 @@ const ClassroomSection2 = () => {
             Study Material
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.card, { marginTop: 40 }]}>
+        <TouchableOpacity
+          style={[styles.card, { marginTop: 40 }]}
+          onPress={() => navigation.navigate("AssignmentList")}
+        >
           <Svg
             width="130px"
             height="140px"

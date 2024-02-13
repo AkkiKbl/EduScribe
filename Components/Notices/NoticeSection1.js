@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { storage } from "../../firebase";
@@ -53,7 +54,7 @@ const NoticeSection1 = ({ value }) => {
         <Text style={{ color: "white", fontSize: 28, fontWeight: "600" }}>
           {value}
         </Text>
-
+        <View style={styles.line} />
         <FlatList
           data={data}
           extraData={state}
@@ -80,3 +81,12 @@ const NoticeSection1 = ({ value }) => {
 };
 
 export default NoticeSection1;
+
+const styles = StyleSheet.create({
+  line: {
+    width: 200,
+    height: 1,
+    backgroundColor: "white",
+    marginBottom: 20,
+  },
+});

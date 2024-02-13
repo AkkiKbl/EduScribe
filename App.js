@@ -20,6 +20,11 @@ import NoticeScreen from "./screens/NoticeScreen";
 import CartDisplay from "./Components/Canteen/CartDisplay";
 import BillScreen from "./Components/Canteen/BillScreen";
 import ImageView from "./Components/Notices/ImageView";
+import ResultClass from "./Components/Academics/Result/ResultClass";
+import ResultDownload from "./Components/Academics/Result/ResultDownload";
+import TimeTableClass from "./Components/Academics/TimeTable/TimeTableClass";
+import TimeTableDownload from "./Components/Academics/TimeTable/TimeTableDownload";
+import AssignmentsList from "./Components/Classroom/Assignments/AssignmentsList";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -28,6 +33,39 @@ const StudyMaterialStack = createNativeStackNavigator();
 const StudyCourseStack = createNativeStackNavigator();
 const CanteenStack = createNativeStackNavigator();
 const NoticeStack = createNativeStackNavigator();
+const AcademicsStack = createNativeStackNavigator();
+
+function AcademicStackGroup() {
+  return (
+    <AcademicsStack.Navigator>
+      <AcademicsStack.Screen
+        options={{ headerShown: false }}
+        name="AcademicsScreen"
+        component={AcademicsScreen}
+      />
+      <AcademicsStack.Screen
+        options={{ headerShown: false }}
+        name="ResultClass"
+        component={ResultClass}
+      />
+      <AcademicsStack.Screen
+        options={{ headerShown: false }}
+        name="ResultDownload"
+        component={ResultDownload}
+      />
+      <AcademicsStack.Screen
+        options={{ headerShown: false }}
+        name="TimeTableClass"
+        component={TimeTableClass}
+      />
+      <AcademicsStack.Screen
+        options={{ headerShown: false }}
+        name="TimeTableDownload"
+        component={TimeTableDownload}
+      />
+    </AcademicsStack.Navigator>
+  );
+}
 
 function StudyMaterialStackGroup() {
   return (
@@ -86,6 +124,12 @@ function ClassroomStackGroup() {
         name="Classroom"
         component={ClassroomScreen}
       />
+      <ClassroomStack.Screen
+        options={{ headerShown: false }}
+        name="AssignmentList"
+        component={AssignmentsList}
+      />
+
       <ClassroomStack.Screen
         options={{ headerShown: false }}
         name="StudyMaterialGroupStack"
@@ -151,8 +195,8 @@ function HomeStackGroup() {
       />
       <HomeStack.Screen
         options={{ headerShown: false }}
-        name="Academics"
-        component={AcademicsScreen}
+        name="AcademicsGroupStack"
+        component={AcademicStackGroup}
       />
       <HomeStack.Screen
         options={{ headerShown: false }}
