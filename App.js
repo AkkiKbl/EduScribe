@@ -19,6 +19,7 @@ import SemesterScreen from "./Components/StudyMaterial/SemesterScreen";
 import NoticeScreen from "./screens/NoticeScreen";
 import CartDisplay from "./Components/Canteen/CartDisplay";
 import BillScreen from "./Components/Canteen/BillScreen";
+import ImageView from "./Components/Notices/ImageView";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -26,6 +27,7 @@ const ClassroomStack = createNativeStackNavigator();
 const StudyMaterialStack = createNativeStackNavigator();
 const StudyCourseStack = createNativeStackNavigator();
 const CanteenStack = createNativeStackNavigator();
+const NoticeStack = createNativeStackNavigator();
 
 function StudyMaterialStackGroup() {
   return (
@@ -117,6 +119,23 @@ function CanteenStackGroup() {
   );
 }
 
+function NoticeStackGroup() {
+  return (
+    <NoticeStack.Navigator>
+      <NoticeStack.Screen
+        options={{ headerShown: false }}
+        name="Notices"
+        component={NoticeScreen}
+      />
+      <NoticeStack.Screen
+        options={{ headerShown: false }}
+        name="ImageView"
+        component={ImageView}
+      />
+    </NoticeStack.Navigator>
+  );
+}
+
 function HomeStackGroup() {
   return (
     <HomeStack.Navigator initialRouteName="Home">
@@ -152,8 +171,8 @@ function HomeStackGroup() {
       />
       <HomeStack.Screen
         options={{ headerShown: false }}
-        name="Notices"
-        component={NoticeScreen}
+        name="NoticesGroupStack"
+        component={NoticeStackGroup}
       />
       <HomeStack.Screen
         options={{ headerShown: false }}
