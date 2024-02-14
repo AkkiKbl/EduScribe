@@ -34,10 +34,16 @@ const StudySection1 = () => {
         >
           <Text style={[styles.textColor, styles.textStyle]}>FYBCA</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigateScreen("SYBCA")}
+        >
           <Text style={[styles.textColor, styles.textStyle]}>SYBCA</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigateScreen("TYBCA")}
+        >
           <Text style={[styles.textColor, styles.textStyle]}>TYBCA</Text>
         </TouchableOpacity>
       </View>

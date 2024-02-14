@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  ToastAndroid,
 } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import { StackActions, useNavigation } from "@react-navigation/native";
@@ -67,11 +68,16 @@ const LoginScreen = () => {
 
       setUserDetails(data1[0]);
 
-      if (data1) {
+      if (Object.keys(data1).length) {
         value.isLoggedIn = true;
         storeData();
-        // navigation.navigate("HomeGroupStack");
         navigation.dispatch(StackActions.replace("HomeGroupStack"));
+      } else {
+        ToastAndroid.showWithGravity(
+          "Invalid Username or Password",
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        );
       }
     };
 
