@@ -36,7 +36,6 @@ const AssignmentsCourses = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(Object.keys(data).length);
     for (const [key, value] of Object.entries(data)) {
       subjects.push(key);
     }
@@ -44,10 +43,20 @@ const AssignmentsCourses = () => {
 
   function navigateToAssignment(item) {
     const path = courseClass + "/" + item;
-    navigation.navigate("AssignmentDisplayList", path);
+    let assignData = [];
+    for (const [key, value] of Object.entries(data)) {
+      if (key == item) {
+        assignData = { [key]: value };
+      }
+    }
+
+    navigation.navigate("AssignmentDisplayList", {
+      filePath: path,
+      assignData: assignData,
+    });
   }
 
-  function teacherIncharge(item) {
+  function DisplayTeacherIncharge(item) {
     let data = [];
     item.forEach((element, index) => {
       if (item.length - 1 == index) {
@@ -89,7 +98,7 @@ const AssignmentsCourses = () => {
                     {data[item].subject}
                   </Text>
                   <Text style={[styles.textColor, { marginTop: 5 }]}>
-                    In Charge : {teacherIncharge(data[item].teacher)}
+                    In Charge : {DisplayTeacherIncharge(data[item].teacher)}
                   </Text>
                 </TouchableOpacity>
               </View>

@@ -11,9 +11,11 @@ import { db } from "../../../firebase";
 import { useNavigation } from "@react-navigation/native";
 
 const AssignmentDisplay = (routes) => {
-  const filePath = routes.route.params;
+  const { filePath, assignData } = routes.route.params;
+  // console.log(assignData);
   const [data, setData] = useState([]);
   const navigation = useNavigation();
+  const [temp, setTemp] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,13 +27,36 @@ const AssignmentDisplay = (routes) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.data());
         setData((oldObject) => [...oldObject, doc.data()]);
+        temp.push({ [doc.id]: doc.data() });
+        // console.log(doc.id);
       });
     };
+
     fetchData();
   }, []);
-
   function navigateToDisplayAssignment(item) {
-    navigation.navigate("AssignmentDisplayDetails", item);
+    // console.log(temp);
+
+    const doc_id = checkData(item);
+    // console.log(doc_id);
+    navigation.navigate("AssignmentDisplayDetails", {
+      data: item,
+      subjectData: assignData,
+      docId: doc_id,
+    });
+  }
+
+  function checkData(item) {
+    // console.log(item);
+    for (let i = 0; i < temp.length; i++)
+      for (const [key, value] of Object.entries(temp[i])) {
+        if (
+          value.Assignment == item.Assignment &&
+          value.description == item.description
+        ) {
+          return key;
+        }
+      }
   }
 
   return (
@@ -56,7 +81,7 @@ const AssignmentDisplay = (routes) => {
                 <Text
                   style={[
                     styles.textColor,
-                    { fontSize: 34, fontWeight: "600" },
+                    { fontSize: 34, fontWeight: "600", width: "85%" },
                   ]}
                   numberOfLines={1}
                 >
