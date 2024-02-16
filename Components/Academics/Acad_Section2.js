@@ -8,7 +8,6 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
 import { G, Path, Polygon, Rect, Svg } from "react-native-svg";
-import { Link } from "@react-navigation/native";
 
 const Acad_Section2 = () => {
   const navigation = useNavigation();

@@ -52,11 +52,24 @@ const AssignmentDisplay = (routes) => {
               style={styles.button}
               onPress={() => navigateToDisplayAssignment(item)}
             >
-              <Text
-                style={[styles.textColor, { fontSize: 18, fontWeight: "600" }]}
-              >
-                {item.Assignment}
-              </Text>
+              <View style={{ marginLeft: 30, marginTop: 14 }}>
+                <Text
+                  style={[
+                    styles.textColor,
+                    { fontSize: 34, fontWeight: "600" },
+                  ]}
+                  numberOfLines={1}
+                >
+                  {item.Assignment}
+                </Text>
+                <Text
+                  style={[styles.textColor, { width: "85%", marginTop: 5 }]}
+                  numberOfLines={1}
+                >
+                  Description: {item.description}
+                </Text>
+                <Text style={styles.textColor}>Due Date : {item.duedate}</Text>
+              </View>
             </TouchableOpacity>
           </View>
         )}
@@ -77,11 +90,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "black",
-    width: 180,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
+    width: "85%",
+    height: 120,
+    borderRadius: 10,
     marginBottom: 20,
   },
   line: {

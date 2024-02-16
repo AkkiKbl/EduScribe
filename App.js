@@ -24,7 +24,6 @@ import ResultClass from "./Components/Academics/Result/ResultClass";
 import ResultDownload from "./Components/Academics/Result/ResultDownload";
 import TimeTableClass from "./Components/Academics/TimeTable/TimeTableClass";
 import TimeTableDownload from "./Components/Academics/TimeTable/TimeTableDownload";
-import AssignmentsClassList from "./Components/Classroom/Assignments/AssignmentsClassList";
 import AssignmentsCourses from "./Components/Classroom/Assignments/AssignmentsCourses";
 import AssignmentDisplayList from "./Components/Classroom/Assignments/AssignmentDisplayList";
 import AssignmentDisplayDetails from "./Components/Classroom/Assignments/AssignmentDisplayDetails";
@@ -127,11 +126,7 @@ function ClassroomStackGroup() {
         name="Classroom"
         component={ClassroomScreen}
       />
-      <ClassroomStack.Screen
-        options={{ headerShown: false }}
-        name="AssignmentClassList"
-        component={AssignmentsClassList}
-      />
+
       <ClassroomStack.Screen
         options={{ headerShown: false }}
         name="AssignmentCourses"

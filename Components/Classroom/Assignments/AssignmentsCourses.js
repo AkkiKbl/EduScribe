@@ -4,65 +4,103 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+  StatusBar,
+  ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { doc, getDoc, query, where } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useNavigation } from "@react-navigation/native";
+import { AppContext } from "../../../context/AppContext";
 
-const AssignmentsCourses = (routes) => {
-  const courseClass = routes.route.params;
+const AssignmentsCourses = () => {
+  const context = useContext(AppContext);
+  const courseClass = context.userDetails.studyYear;
   const navigation = useNavigation();
   const [data, setData] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const docRef = doc(db, "assignments", "courses");
+
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setData(docSnap.data());
+        setData(docSnap.data()[courseClass]);
       } else {
-        // docSnap.data() will be undefined in this case
         console.log("No such document!");
       }
     };
-
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // console.log(Object.keys(data).length);
+    for (const [key, value] of Object.entries(data)) {
+      subjects.push(key);
+    }
+  }, [data]);
 
   function navigateToAssignment(item) {
     const path = courseClass + "/" + item;
     navigation.navigate("AssignmentDisplayList", path);
   }
 
-  //   console.log(data[courseClass]);
+  function teacherIncharge(item) {
+    let data = [];
+    item.forEach((element, index) => {
+      if (item.length - 1 == index) {
+        data += element;
+      } else {
+        data += element + ",";
+      }
+    });
+    return data;
+  }
+
   return (
     <View style={styles.container}>
+      <StatusBar barStyle={"light-content"} backgroundColor={"#474747"} />
       <View style={{ alignItems: "center", marginTop: 30 }}>
         <Text style={[styles.textColor, { fontSize: 36, fontWeight: "bold" }]}>
           Courses
         </Text>
         <View style={styles.line} />
       </View>
-
-      <FlatList
-        data={data[courseClass]}
-        extraData={data}
-        renderItem={({ item }) => (
-          <View style={{ alignItems: "center" }}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigateToAssignment(item)}
-            >
-              <Text
-                style={[styles.textColor, { fontSize: 18, fontWeight: "600" }]}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+      {Object.keys(data).length ? (
+        <View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={subjects}
+            extraData={subjects}
+            renderItem={({ item }) => (
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigateToAssignment(item)}
+                >
+                  <Text
+                    style={[
+                      styles.textColor,
+                      { fontSize: 40, fontWeight: "600", marginTop: 20 },
+                    ]}
+                  >
+                    {data[item].subject}
+                  </Text>
+                  <Text style={[styles.textColor, { marginTop: 5 }]}>
+                    In Charge : {teacherIncharge(data[item].teacher)}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        </View>
+      ) : (
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.textColor}>Nothing To show</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -79,12 +117,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "black",
-    width: 180,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
+    width: "85%",
+    height: 120,
+    borderRadius: 10,
     marginBottom: 20,
+    alignItems: "center",
   },
   line: {
     width: "70%",
