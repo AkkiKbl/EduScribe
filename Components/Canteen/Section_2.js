@@ -1,27 +1,126 @@
-import { View, Text, StyleSheet, Switch, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Switch,
+  TouchableOpacity,
+  Touchable,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import Canteen_menu from "./Canteen_Menu/Canteen_menu";
 
 const Section_2 = () => {
   const [Veg, setVeg] = useState(false);
   const [NonVeg, setNonVeg] = useState(false);
+  const [data, setData] = useState([]);
+  const [isMeal, setIsMeal] = useState(true);
+  const [isSnacks, setIsSnacks] = useState(true);
+  const [isDrinks, setisDrinks] = useState(true);
+  const tempHighlight = {
+    meal: false,
+    snacks: false,
+    drinks: false,
+  };
+  const [highlight, setHighlight] = useState(tempHighlight);
 
+  function changeState(item) {
+    if (isMeal == true && isSnacks == true && isDrinks == true) {
+      if (item == "meal") {
+        setIsMeal(true);
+        setIsSnacks(false);
+        setisDrinks(false);
+      } else if (item == "snacks") {
+        setIsMeal(false);
+        setIsSnacks(true);
+        setisDrinks(false);
+      } else {
+        setIsMeal(false);
+        setIsSnacks(false);
+        setisDrinks(true);
+      }
+    } else {
+      setIsMeal(true);
+      setIsSnacks(true);
+      setisDrinks(true);
+    }
+
+    if (isMeal == false || isSnacks == false || isDrinks == false) {
+      tempHighlight.meal = false;
+      tempHighlight.snacks = false;
+      tempHighlight.drinks = false;
+      setHighlight(tempHighlight);
+    } else {
+      tempHighlight[item] = true;
+      setHighlight(tempHighlight);
+    }
+  }
+
+  useEffect(() => {
+    setData({
+      meal: isMeal,
+      snacks: isSnacks,
+      drinks: isDrinks,
+    });
+  }, [isMeal, isSnacks, isDrinks]);
   return (
     <View>
       {/* Filter buttons */}
+
       <View style={{ justifyContent: "space-around", flexDirection: "row" }}>
-        <View style={styles.buttons}>
-          <Text style={{ color: "white" }}>Meal</Text>
-        </View>
-        <View style={styles.buttons}>
-          <Text style={{ color: "white" }}>Snacks</Text>
-        </View>
-        <View style={styles.buttons}>
-          <Text style={{ color: "white" }}>Drinks</Text>
-        </View>
+        {/* meal button */}
+        {highlight.meal ? (
+          <TouchableOpacity
+            style={[styles.buttons, { backgroundColor: "white" }]}
+            onPress={() => changeState("meal")}
+          >
+            <Text style={{ color: "black" }}>Meal</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => changeState("meal")}
+          >
+            <Text style={{ color: "white" }}>Meal</Text>
+          </TouchableOpacity>
+        )}
+
+        {/* Snacks Button */}
+
+        {highlight.snacks ? (
+          <TouchableOpacity
+            style={[styles.buttons, { backgroundColor: "white" }]}
+            onPress={() => changeState("snacks")}
+          >
+            <Text style={{ color: "black" }}>Snacks</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => changeState("snacks")}
+          >
+            <Text style={{ color: "white" }}>Snacks</Text>
+          </TouchableOpacity>
+        )}
+
+        {highlight.drinks ? (
+          <TouchableOpacity
+            style={[styles.buttons, { backgroundColor: "white" }]}
+            onPress={() => changeState("drinks")}
+          >
+            <Text style={{ color: "black" }}>Drinks</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => changeState("drinks")}
+          >
+            <Text style={{ color: "white" }}>Drinks</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       {/* Veg/NonVeg Switch Buttons */}
-      <View style={{ flexDirection: "row" }}>
+      {/* <View style={{ flexDirection: "row" }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity
             style={[
@@ -56,7 +155,8 @@ const Section_2 = () => {
           </TouchableOpacity>
           <Text style={styles.switchText}>Non-Veg</Text>
         </View>
-      </View>
+      </View> */}
+      <Canteen_menu value={data} />
     </View>
   );
 };

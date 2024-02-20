@@ -5,6 +5,7 @@ import { db, storage } from "../../../firebase";
 import * as DocumentPicker from "expo-document-picker";
 import { AppContext } from "../../../context/AppContext";
 import {
+  arrayRemove,
   arrayUnion,
   collection,
   deleteField,
@@ -52,8 +53,8 @@ const AssignmentDisplayDetails = (routes) => {
       try {
         const studentRef = doc(db, "assignments", "students");
         const docSnap = await getDoc(studentRef);
-        const test = docSnap.data()[subject][docId];
-        if (test) {
+        if (docSnap.data()[subject]) {
+          const test = docSnap.data()[subject][docId];
           setIsUploaded(test[context.userDetails.rollNo]);
         }
       } catch (error) {
@@ -143,6 +144,16 @@ const AssignmentDisplayDetails = (routes) => {
       console.log(isUploaded.location);
       const fileRef = ref(storage, isUploaded.location);
       deleteObject(fileRef);
+
+      const assignmentDoc = doc(
+        db,
+        "assignments/" + "TYBCA/" + subject + "/" + docId
+      );
+
+      updateDoc(assignmentDoc, {
+        submitted: arrayRemove(context.userDetails.rollNo),
+      });
+
       setIsUploaded("");
     } catch (error) {
       console.log("Error" + error);

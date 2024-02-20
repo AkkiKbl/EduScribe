@@ -9,12 +9,28 @@ import React, { useContext, useEffect, useState } from "react";
 import Attendance from "./ClassroomDetails/Attendance";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getCountFromServer,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { AppContext } from "../../context/AppContext";
 
 const ClassroomDetails = ({ user }) => {
   const navigation = useNavigation();
   const [Totalinternship, setTotalinternship] = useState("");
+  const [subjects, setSubjects] = useState([]);
+  const [data, setData] = useState([]);
+  const [count, setCount] = useState(0);
+  const [deadlines, setDeadlines] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+  let totalAssignments = 0;
+
+  // console.log(user);
 
   useEffect(() => {
     const getInternTotal = async () => {
@@ -24,8 +40,50 @@ const ClassroomDetails = ({ user }) => {
     getInternTotal();
   }, []);
 
-  let deadlines = user.deadlines;
   let department = user.stream;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const docRef = doc(db, "assignments", "courses");
+      const docSnap = await getDoc(docRef);
+
+      for (const [key, value] of Object.entries(
+        docSnap.data()[user.studyYear]
+      )) {
+        subjects.push(key);
+      }
+
+      // Get data from every subject
+      let subjectCount = 0;
+      subjects.forEach((item) => {
+        const fetchData = async (item) => {
+          const subjectCollec = collection(db, "assignments", "TYBCA", item);
+
+          const allSubjects = await getCountFromServer(subjectCollec);
+
+          totalAssignments += allSubjects.data().count;
+
+          setTotalCount(totalAssignments);
+
+          const q = query(
+            subjectCollec,
+            where("submitted", "array-contains", user.rollNo)
+          );
+
+          subjectCount =
+            (await getCountFromServer(q)).data().count + subjectCount;
+          setCount(subjectCount);
+        };
+
+        fetchData(item);
+      });
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setDeadlines(totalCount - count);
+  }, [count]);
 
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -66,7 +124,7 @@ const ClassroomDetails = ({ user }) => {
 
           {/* Card2 */}
 
-          <TouchableOpacity style={styles.card2}>
+          <View style={styles.card2}>
             <Text
               style={{
                 color: "white",
@@ -84,12 +142,12 @@ const ClassroomDetails = ({ user }) => {
               <View style={styles.attendanceLine} />
             </View>
             <Attendance user={user} />
-          </TouchableOpacity>
+          </View>
         </View>
 
         {/* Card 3 */}
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <TouchableOpacity style={styles.card3}>
+          <View style={styles.card3}>
             <Text
               style={{
                 color: "white",
@@ -111,7 +169,7 @@ const ClassroomDetails = ({ user }) => {
             >
               {deadlines}
             </Text>
-          </TouchableOpacity>
+          </View>
         </View>
         <View
           style={{

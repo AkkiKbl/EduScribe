@@ -67,7 +67,7 @@ const Acad_Section2 = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.perLineCards}>
-        <View style={styles.cards}>
+        <TouchableOpacity style={styles.cards}>
           <Text style={styles.textColor}>Workshop</Text>
           <Svg
             fill="#FFFFFF"
@@ -93,7 +93,7 @@ const Acad_Section2 = () => {
               </G>
             </G>
           </Svg>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.cards}
           onPress={() =>

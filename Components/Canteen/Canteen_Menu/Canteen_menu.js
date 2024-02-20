@@ -9,16 +9,21 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import FoodItems from "../../../resources/CanteenMenu";
-import Section_1 from "../Section_1";
-import Section_2 from "../Section_2";
+
 import { useNavigation } from "@react-navigation/native";
 
-const Canteen_menu = () => {
+const Canteen_menu = (props) => {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
   const [data4, setData4] = useState([]);
+  const [selectType, setselectType] = useState(props.value);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    setselectType(props.value);
+    // console.log(selectType);
+  }, [props.value]);
 
   let cart = [];
 
@@ -233,71 +238,79 @@ const Canteen_menu = () => {
   function RenderFlatlist1() {
     return (
       <View>
-        <View style={styles.titleText}>
-          <Text style={styles.TextColor}>Meal</Text>
-          <View style={styles.line} />
-        </View>
-        <View
-          style={{
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-          <FlatList
-            numColumns={"2"}
-            scrollEnabled={false}
-            keyExtractor={(item) => item.id}
-            data={data1}
-            extraData={data1}
-            renderItem={({ item }) => (
-              <View style={styles.cards}>
-                <View>
-                  {item.isSelected ? (
-                    <TouchableOpacity style={styles.menuButton}>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                        }}
-                      >
-                        <Text
-                          style={styles.decreaseQuantity}
-                          onPress={() => decreQuantity(item.id, item.tag)}
-                        >
-                          -
-                        </Text>
-                        <View style={styles.quantityView}>
-                          <Text
-                            style={{
-                              fontSize: 18,
-                            }}
+        {selectType.meal ? (
+          <View>
+            <View style={styles.titleText}>
+              <Text style={styles.TextColor}>Meal</Text>
+              <View style={styles.line} />
+            </View>
+            <View
+              style={{
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <FlatList
+                numColumns={"2"}
+                scrollEnabled={false}
+                keyExtractor={(item) => item.id}
+                data={data1}
+                extraData={data1}
+                renderItem={({ item }) => (
+                  <View>
+                    <View style={styles.cards}>
+                      <View>
+                        {item.isSelected ? (
+                          <TouchableOpacity style={styles.menuButton}>
+                            <View
+                              style={{
+                                flexDirection: "row",
+                              }}
+                            >
+                              <Text
+                                style={styles.decreaseQuantity}
+                                onPress={() => decreQuantity(item.id, item.tag)}
+                              >
+                                -
+                              </Text>
+                              <View style={styles.quantityView}>
+                                <Text
+                                  style={{
+                                    fontSize: 18,
+                                  }}
+                                >
+                                  {item.quantity}
+                                </Text>
+                              </View>
+                              <Text
+                                style={styles.increaseQuantity}
+                                onPress={() => increQuantity(item.id, item.tag)}
+                              >
+                                +
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        ) : (
+                          <TouchableOpacity
+                            style={styles.menuButton}
+                            onPress={() => onClickAdd(item.id, item.tag)}
                           >
-                            {item.quantity}
-                          </Text>
-                        </View>
-                        <Text
-                          style={styles.increaseQuantity}
-                          onPress={() => increQuantity(item.id, item.tag)}
-                        >
-                          +
-                        </Text>
+                            <Text style={styles.addButtonText}>Add</Text>
+                          </TouchableOpacity>
+                        )}
                       </View>
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity
-                      style={styles.menuButton}
-                      onPress={() => onClickAdd(item.id, item.tag)}
-                    >
-                      <Text style={styles.addButtonText}>Add</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-                <Text style={styles.textColor}>Rs.{item.price}</Text>
-                <Text style={styles.textColor}>{item.foodItem}</Text>
-                <View style={styles.line} />
-              </View>
-            )}
-          />
-        </View>
+                      <Text style={styles.textColor}>Rs.{item.price}</Text>
+                      <Text style={styles.textColor}>{item.foodItem}</Text>
+                      <View style={styles.line} />
+                    </View>
+                  </View>
+                )}
+              />
+            </View>
+          </View>
+        ) : (
+          <View></View>
+        )}
       </View>
     );
   }
@@ -306,72 +319,78 @@ const Canteen_menu = () => {
   function RenderFlatlist2() {
     return (
       <View>
-        <View style={styles.titleText}>
-          <Text style={styles.TextColor}>Snacks</Text>
-          <View style={styles.line} />
-        </View>
-        <View
-          style={{
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-          <FlatList
-            numColumns={"2"}
-            scrollEnabled={false}
-            keyExtractor={(item) => item.id}
-            data={data2}
-            extraData={data2}
-            renderItem={({ item }) => (
-              <View style={styles.cards}>
-                <View>
-                  {item.isSelected ? (
-                    <View style={styles.menuButton}>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <Text
-                          style={styles.decreaseQuantity}
-                          onPress={() => decreQuantity(item.id, item.tag)}
-                        >
-                          -
-                        </Text>
-                        <View style={styles.quantityView}>
-                          <Text
+        {selectType.snacks ? (
+          <View>
+            <View style={styles.titleText}>
+              <Text style={styles.TextColor}>Snacks</Text>
+              <View style={styles.line} />
+            </View>
+            <View
+              style={{
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <FlatList
+                numColumns={"2"}
+                scrollEnabled={false}
+                keyExtractor={(item) => item.id}
+                data={data2}
+                extraData={data2}
+                renderItem={({ item }) => (
+                  <View style={styles.cards}>
+                    <View>
+                      {item.isSelected ? (
+                        <View style={styles.menuButton}>
+                          <View
                             style={{
-                              fontSize: 18,
+                              flexDirection: "row",
+                              justifyContent: "space-evenly",
                             }}
                           >
-                            {item.quantity}
-                          </Text>
+                            <Text
+                              style={styles.decreaseQuantity}
+                              onPress={() => decreQuantity(item.id, item.tag)}
+                            >
+                              -
+                            </Text>
+                            <View style={styles.quantityView}>
+                              <Text
+                                style={{
+                                  fontSize: 18,
+                                }}
+                              >
+                                {item.quantity}
+                              </Text>
+                            </View>
+                            <Text
+                              style={styles.increaseQuantity}
+                              onPress={() => increQuantity(item.id, item.tag)}
+                            >
+                              +
+                            </Text>
+                          </View>
                         </View>
-                        <Text
-                          style={styles.increaseQuantity}
-                          onPress={() => increQuantity(item.id, item.tag)}
+                      ) : (
+                        <TouchableOpacity
+                          style={styles.menuButton}
+                          onPress={() => onClickAdd(item.id, item.tag)}
                         >
-                          +
-                        </Text>
-                      </View>
+                          <Text style={styles.addButtonText}>Add</Text>
+                        </TouchableOpacity>
+                      )}
                     </View>
-                  ) : (
-                    <TouchableOpacity
-                      style={styles.menuButton}
-                      onPress={() => onClickAdd(item.id, item.tag)}
-                    >
-                      <Text style={styles.addButtonText}>Add</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-                <Text style={styles.textColor}>Rs.{item.price}</Text>
-                <Text style={styles.textColor}>{item.foodItem}</Text>
-                <View style={styles.line} />
-              </View>
-            )}
-          />
-        </View>
+                    <Text style={styles.textColor}>Rs.{item.price}</Text>
+                    <Text style={styles.textColor}>{item.foodItem}</Text>
+                    <View style={styles.line} />
+                  </View>
+                )}
+              />
+            </View>
+          </View>
+        ) : (
+          <View></View>
+        )}
       </View>
     );
   }
@@ -380,72 +399,78 @@ const Canteen_menu = () => {
   function RenderFlatlist3() {
     return (
       <View>
-        <View style={styles.titleText}>
-          <Text style={styles.TextColor}>Drinks</Text>
-          <View style={styles.line} />
-        </View>
-        <View
-          style={{
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-          <FlatList
-            numColumns={"2"}
-            scrollEnabled={false}
-            keyExtractor={(item) => item.id}
-            data={data3}
-            extraData={data3}
-            renderItem={({ item }) => (
-              <View style={styles.cards}>
-                <View>
-                  {item.isSelected ? (
-                    <TouchableOpacity style={styles.menuButton}>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <Text
-                          style={styles.decreaseQuantity}
-                          onPress={() => decreQuantity(item.id, item.tag)}
-                        >
-                          -
-                        </Text>
-                        <View style={styles.quantityView}>
-                          <Text
+        {selectType.drinks ? (
+          <View>
+            <View style={styles.titleText}>
+              <Text style={styles.TextColor}>Drinks</Text>
+              <View style={styles.line} />
+            </View>
+            <View
+              style={{
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <FlatList
+                numColumns={"2"}
+                scrollEnabled={false}
+                keyExtractor={(item) => item.id}
+                data={data3}
+                extraData={data3}
+                renderItem={({ item }) => (
+                  <View style={styles.cards}>
+                    <View>
+                      {item.isSelected ? (
+                        <TouchableOpacity style={styles.menuButton}>
+                          <View
                             style={{
-                              fontSize: 18,
+                              flexDirection: "row",
+                              justifyContent: "space-evenly",
                             }}
                           >
-                            {item.quantity}
-                          </Text>
-                        </View>
-                        <Text
-                          style={styles.increaseQuantity}
-                          onPress={() => increQuantity(item.id, item.tag)}
+                            <Text
+                              style={styles.decreaseQuantity}
+                              onPress={() => decreQuantity(item.id, item.tag)}
+                            >
+                              -
+                            </Text>
+                            <View style={styles.quantityView}>
+                              <Text
+                                style={{
+                                  fontSize: 18,
+                                }}
+                              >
+                                {item.quantity}
+                              </Text>
+                            </View>
+                            <Text
+                              style={styles.increaseQuantity}
+                              onPress={() => increQuantity(item.id, item.tag)}
+                            >
+                              +
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      ) : (
+                        <TouchableOpacity
+                          style={styles.menuButton}
+                          onPress={() => onClickAdd(item.id, item.tag)}
                         >
-                          +
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity
-                      style={styles.menuButton}
-                      onPress={() => onClickAdd(item.id, item.tag)}
-                    >
-                      <Text style={styles.addButtonText}>Add</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-                <Text style={styles.textColor}>Rs.{item.price}</Text>
-                <Text style={styles.textColor}>{item.foodItem}</Text>
-                <View style={styles.line} />
-              </View>
-            )}
-          />
-        </View>
+                          <Text style={styles.addButtonText}>Add</Text>
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                    <Text style={styles.textColor}>Rs.{item.price}</Text>
+                    <Text style={styles.textColor}>{item.foodItem}</Text>
+                    <View style={styles.line} />
+                  </View>
+                )}
+              />
+            </View>
+          </View>
+        ) : (
+          <View></View>
+        )}
       </View>
     );
   }
@@ -526,8 +551,6 @@ const Canteen_menu = () => {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Section_1 />
-        <Section_2 />
         <RenderFlatlist1 />
         <RenderFlatlist2 />
         <RenderFlatlist3 />
