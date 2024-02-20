@@ -76,7 +76,6 @@ const Section_1 = () => {
           </View>
         </View>
       </View>
-      <Section_2 />
     </View>
   );
 };

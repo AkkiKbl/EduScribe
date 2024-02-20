@@ -7,11 +7,9 @@ import {
   Touchable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import Canteen_menu from "./Canteen_Menu/Canteen_menu";
+// import Canteen_menu from "./Canteen_Menu/Canteen_menu";
 
 const Section_2 = () => {
-  const [Veg, setVeg] = useState(false);
-  const [NonVeg, setNonVeg] = useState(false);
   const [data, setData] = useState([]);
   const [isMeal, setIsMeal] = useState(true);
   const [isSnacks, setIsSnacks] = useState(true);
@@ -156,7 +154,7 @@ const Section_2 = () => {
           <Text style={styles.switchText}>Non-Veg</Text>
         </View>
       </View> */}
-      <Canteen_menu value={data} />
+      {/* <Canteen_menu value={data} /> */}
     </View>
   );
 };

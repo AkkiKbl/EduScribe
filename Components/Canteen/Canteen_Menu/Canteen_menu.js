@@ -11,19 +11,127 @@ import React, { useEffect, useState } from "react";
 import FoodItems from "../../../resources/CanteenMenu";
 
 import { useNavigation } from "@react-navigation/native";
+import Section_1 from "../Section_1";
+// import Section_2 from "../Section_2";
 
 const Canteen_menu = (props) => {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
   const [data4, setData4] = useState([]);
-  const [selectType, setselectType] = useState(props.value);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    setselectType(props.value);
-    // console.log(selectType);
-  }, [props.value]);
+  //------------------------Menu Tags---------------------------------
+
+  const [isMeal, setIsMeal] = useState(true);
+  const [isSnacks, setIsSnacks] = useState(true);
+  const [isDrinks, setisDrinks] = useState(true);
+  const tempHighlight = {
+    meal: false,
+    snacks: false,
+    drinks: false,
+  };
+  const [highlight, setHighlight] = useState(tempHighlight);
+
+  function changeState(item) {
+    if (isMeal == true && isSnacks == true && isDrinks == true) {
+      if (item == "meal") {
+        setIsMeal(true);
+        setIsSnacks(false);
+        setisDrinks(false);
+      } else if (item == "snacks") {
+        setIsMeal(false);
+        setIsSnacks(true);
+        setisDrinks(false);
+      } else {
+        setIsMeal(false);
+        setIsSnacks(false);
+        setisDrinks(true);
+      }
+    } else {
+      setIsMeal(true);
+      setIsSnacks(true);
+      setisDrinks(true);
+    }
+
+    if (isMeal == false || isSnacks == false || isDrinks == false) {
+      tempHighlight.meal = false;
+      tempHighlight.snacks = false;
+      tempHighlight.drinks = false;
+      setHighlight(tempHighlight);
+    } else {
+      tempHighlight[item] = true;
+      setHighlight(tempHighlight);
+    }
+  }
+
+  function MenuTags() {
+    return (
+      <View>
+        {/* Filter buttons */}
+
+        <View style={{ justifyContent: "space-around", flexDirection: "row" }}>
+          {/* meal button */}
+          {highlight.meal ? (
+            <TouchableOpacity
+              style={[styles.buttons, { backgroundColor: "white" }]}
+              onPress={() => changeState("meal")}
+            >
+              <Text style={{ color: "black" }}>Meal</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={() => changeState("meal")}
+            >
+              <Text style={{ color: "white" }}>Meal</Text>
+            </TouchableOpacity>
+          )}
+
+          {/* Snacks Button */}
+
+          {highlight.snacks ? (
+            <TouchableOpacity
+              style={[styles.buttons, { backgroundColor: "white" }]}
+              onPress={() => changeState("snacks")}
+            >
+              <Text style={{ color: "black" }}>Snacks</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={() => changeState("snacks")}
+            >
+              <Text style={{ color: "white" }}>Snacks</Text>
+            </TouchableOpacity>
+          )}
+
+          {highlight.drinks ? (
+            <TouchableOpacity
+              style={[styles.buttons, { backgroundColor: "white" }]}
+              onPress={() => changeState("drinks")}
+            >
+              <Text style={{ color: "black" }}>Drinks</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={() => changeState("drinks")}
+            >
+              <Text style={{ color: "white" }}>Drinks</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+    );
+  }
+
+  //-----------------------------------End Of Menu Tag ---------------------------------------------
+
+  // useEffect(() => {
+  //   setselectType(props.value);
+  //   // console.log(selectType);
+  // }, [props.value]);
 
   let cart = [];
 
@@ -238,7 +346,7 @@ const Canteen_menu = (props) => {
   function RenderFlatlist1() {
     return (
       <View>
-        {selectType.meal ? (
+        {isMeal ? (
           <View>
             <View style={styles.titleText}>
               <Text style={styles.TextColor}>Meal</Text>
@@ -319,7 +427,7 @@ const Canteen_menu = (props) => {
   function RenderFlatlist2() {
     return (
       <View>
-        {selectType.snacks ? (
+        {isSnacks ? (
           <View>
             <View style={styles.titleText}>
               <Text style={styles.TextColor}>Snacks</Text>
@@ -399,7 +507,7 @@ const Canteen_menu = (props) => {
   function RenderFlatlist3() {
     return (
       <View>
-        {selectType.drinks ? (
+        {isDrinks ? (
           <View>
             <View style={styles.titleText}>
               <Text style={styles.TextColor}>Drinks</Text>
@@ -551,11 +659,15 @@ const Canteen_menu = (props) => {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
+        <Section_1 />
+        <MenuTags />
         <RenderFlatlist1 />
         <RenderFlatlist2 />
         <RenderFlatlist3 />
         <RenderFlatlist4 />
       </ScrollView>
+
+      {/* Cart Icon */}
       <View style={{ position: "absolute", bottom: 20, right: 20 }}>
         <TouchableOpacity
           style={{
@@ -636,5 +748,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  buttons: {
+    backgroundColor: "#171717",
+    width: "25%",
+    height: 32,
+    borderRadius: 40,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
