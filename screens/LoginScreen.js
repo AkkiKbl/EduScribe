@@ -7,6 +7,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   ToastAndroid,
+  StatusBar,
+  Image,
 } from "react-native";
 import { useFonts, Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import { StackActions, useNavigation } from "@react-navigation/native";
@@ -86,6 +88,19 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <StatusBar barStyle={"dark-content"} backgroundColor={"grey"} />
+      <View style={{ marginTop: -180 }}>
+        <Image
+          source={{
+            uri: "https://firebasestorage.googleapis.com/v0/b/eduscribe-college.appspot.com/o/Logo%2FEduScribeLogo.PNG?alt=media&token=8493d693-f8fa-48a8-b908-b12753c73e91",
+          }}
+          style={{
+            resizeMode: "cover",
+            width: 260,
+            height: 200,
+          }}
+        />
+      </View>
       <View>
         <Text
           style={{

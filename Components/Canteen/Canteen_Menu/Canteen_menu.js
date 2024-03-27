@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Button,
+  Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import FoodItems from "../../../resources/CanteenMenu";
@@ -148,6 +149,7 @@ const Canteen_menu = (props) => {
         isSelected: false,
         nonVeg: item.nonVeg,
         tag: item.tag,
+        link: item.link,
       });
     });
 
@@ -161,6 +163,7 @@ const Canteen_menu = (props) => {
         isSelected: false,
         nonVeg: item.nonVeg,
         tag: item.tag,
+        link: item.link,
       });
     });
 
@@ -175,6 +178,7 @@ const Canteen_menu = (props) => {
         isSelected: false,
         nonVeg: item.nonVeg,
         tag: item.tag,
+        link: item.link,
       });
     });
 
@@ -189,6 +193,7 @@ const Canteen_menu = (props) => {
         isSelected: false,
         nonVeg: item.nonVeg,
         tag: item.tag,
+        link: item.link,
       });
     });
   }, []);
@@ -411,6 +416,16 @@ const Canteen_menu = (props) => {
                       <Text style={styles.textColor}>Rs.{item.price}</Text>
                       <Text style={styles.textColor}>{item.foodItem}</Text>
                       <View style={styles.line} />
+                      <Image
+                        source={{
+                          uri: item.link,
+                        }}
+                        style={{
+                          width: 200,
+                          height: 150,
+                          resizeMode: "contain",
+                        }}
+                      />
                     </View>
                   </View>
                 )}
@@ -491,7 +506,16 @@ const Canteen_menu = (props) => {
                     </View>
                     <Text style={styles.textColor}>Rs.{item.price}</Text>
                     <Text style={styles.textColor}>{item.foodItem}</Text>
+
                     <View style={styles.line} />
+                    {/* {console.log(item.link)} */}
+                    {/* <Text style={styles.textColor}>{item.link}</Text> */}
+                    <Image
+                      source={{
+                        uri: item.link,
+                      }}
+                      style={{ width: 200, height: 150, resizeMode: "contain" }}
+                    />
                   </View>
                 )}
               />
@@ -572,6 +596,12 @@ const Canteen_menu = (props) => {
                     <Text style={styles.textColor}>Rs.{item.price}</Text>
                     <Text style={styles.textColor}>{item.foodItem}</Text>
                     <View style={styles.line} />
+                    <Image
+                      source={{
+                        uri: item.link,
+                      }}
+                      style={{ width: 200, height: 150, resizeMode: "contain" }}
+                    />
                   </View>
                 )}
               />
@@ -726,6 +756,7 @@ const styles = StyleSheet.create({
     flexDirection: "column-reverse",
     alignItems: "center",
     marginTop: 20,
+    overflow: "hidden",
   },
   textColor: {
     color: "white",

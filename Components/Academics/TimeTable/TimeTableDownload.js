@@ -57,7 +57,7 @@ const TimeTableDownload = (routes) => {
     <View style={styles.container}>
       <View style={{ alignItems: "center", marginTop: 30, marginBottom: 20 }}>
         <Text style={[styles.textColor, { fontSize: 32, fontWeight: "600" }]}>
-          Results
+          TimeTable
         </Text>
         <View style={styles.line} />
       </View>

@@ -60,7 +60,6 @@ const ClassroomDetails = ({ user }) => {
           const subjectCollec = collection(db, "assignments", "TYBCA", item);
 
           const allSubjects = await getCountFromServer(subjectCollec);
-
           totalAssignments += allSubjects.data().count;
 
           setTotalCount(totalAssignments);
@@ -70,11 +69,12 @@ const ClassroomDetails = ({ user }) => {
             where("submitted", "array-contains", user.rollNo)
           );
 
-          subjectCount =
-            (await getCountFromServer(q)).data().count + subjectCount;
+          let fetchCount = (await getCountFromServer(q)).data().count;
+          subjectCount += fetchCount;
+          // console.log(subjectCount);
+
           setCount(subjectCount);
         };
-
         fetchData(item);
       });
     };
