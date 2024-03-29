@@ -69,6 +69,14 @@ const InternSection2 = () => {
                       {item.period} months
                     </Text>
                   </View>
+                  <View style={styles.detailSection}>
+                    <Text style={[styles.textColor, styles.detailHeading]}>
+                      Teacher Incharge :
+                    </Text>
+                    <Text style={[styles.textColor, styles.detailInfo]}>
+                      {item.inCharge}
+                    </Text>
+                  </View>
                 </View>
               </View>
             )}
@@ -111,11 +119,12 @@ const styles = StyleSheet.create({
   },
   internshipCards: {
     backgroundColor: "black",
-    height: 150,
+    height: 170,
     maxWidth: 400,
     minWidth: 380,
     marginBottom: 10,
     borderRadius: 10,
+    justifyContent: "space-evenly",
   },
   detailInfo: {
     marginLeft: 10,
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
   },
   detailSection: {
     flexDirection: "row",
-    marginTop: 15,
+
     marginLeft: 20,
     alignItems: "center",
   },

@@ -67,7 +67,10 @@ const Acad_Section2 = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.perLineCards}>
-        <TouchableOpacity style={styles.cards}>
+        <TouchableOpacity
+          style={styles.cards}
+          onPress={() => navigation.navigate("Workshop")}
+        >
           <Text style={styles.textColor}>Workshop</Text>
           <Svg
             fill="#FFFFFF"

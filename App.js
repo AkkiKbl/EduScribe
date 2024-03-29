@@ -27,6 +27,7 @@ import TimeTableDownload from "./Components/Academics/TimeTable/TimeTableDownloa
 import AssignmentsCourses from "./Components/Classroom/Assignments/AssignmentsCourses";
 import AssignmentDisplayList from "./Components/Classroom/Assignments/AssignmentDisplayList";
 import AssignmentDisplayDetails from "./Components/Classroom/Assignments/AssignmentDisplayDetails";
+import WorkshopScreen from "./Components/Academics/WorkshopScreen";
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -62,8 +63,8 @@ function AcademicStackGroup() {
       />
       <AcademicsStack.Screen
         options={{ headerShown: false }}
-        name="TimeTableDownload"
-        component={TimeTableDownload}
+        name="Workshop"
+        component={WorkshopScreen}
       />
     </AcademicsStack.Navigator>
   );
