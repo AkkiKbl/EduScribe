@@ -65,7 +65,7 @@ export const FoodItems = {
       foodItem: "Bread",
       price: 5,
       nonVeg: false,
-      link: "",
+      link: "https://firebasestorage.googleapis.com/v0/b/eduscribe-college.appspot.com/o/canteen%20images%2Fpao.jpg?alt=media&token=5f69fa1d-4a02-4d5b-b373-aa575afb32b5",
       tag: "Extras",
     },
   ],

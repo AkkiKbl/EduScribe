@@ -6,11 +6,11 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DataTable } from "react-native-paper";
 import RNUpiPayment from "react-native-upi-payment";
 import { db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { AppContext } from "../../context/AppContext";
 import { useNavigation } from "@react-navigation/native";
 
@@ -29,9 +29,9 @@ const CartDisplay = (routes) => {
   const onPay = async () => {
     await RNUpiPayment.initializePayment(
       {
-        vpa: "a.kubal@paytm", // or can be john@ybl or mobileNo@upi
-        payeeName: "Akshay Kubal",
-        amount: totalPrice,
+        vpa: "agneld38@indianbk", // or can be john@ybl or mobileNo@upi
+        payeeName: "College Canteen",
+        amount: 1,
         transactionRef: randomChar,
       },
       successCallback,
@@ -50,20 +50,29 @@ const CartDisplay = (routes) => {
         quantity: item.quantity,
       });
     });
+
+    const sentData = {
+      name: user.firstName + " " + user.lastName,
+      rollNo: user.rollNo,
+      stream: user.stream,
+      semester: user.semester,
+      ordered: saveData,
+      totalPrice: totalPrice,
+      transaction_id: data.txnRef,
+      timestamp: serverTimestamp(),
+    };
     const sendData = async () => {
-      await setDoc(doc(db, "canteen", user.rollNo, randomChar), {
-        name: user.firstName + " " + user.lastName,
-        rollNo: user.rollNo,
-        stream: user.stream,
-        semester: user.semester,
-        ordered: saveData,
-        totalPrice: totalPrice,
-        transaction_id: data.txtRef,
-      });
+      await setDoc(doc(db, "canteen", randomChar), sentData);
     };
     sendData();
 
-    navigation.navigate("BillScreen", data.txtRef);
+    const transactionId = data.txnRef;
+
+    navigation.navigate("BillScreen", {
+      saveData: saveData,
+      transactionId: transactionId,
+      totalPrice: totalPrice,
+    });
   }
 
   function failureCallback(data) {

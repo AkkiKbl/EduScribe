@@ -4,8 +4,14 @@ import { db } from "../../firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { DataTable } from "react-native-paper";
 
-const BillScreen = () => {
+const BillScreen = (routes) => {
   const [data, setdata] = useState([]);
+  const { saveData, transactionId, totalPrice } = routes.route.params;
+
+  // useEffect(() => {
+  //   console.log(saveData[0].foodItem);
+  // }, []);
+
   useEffect(() => {
     const getData = async () => {
       const querySnapshot = await getDocs(
@@ -36,31 +42,31 @@ const BillScreen = () => {
         </View>
 
         <DataTable.Row>
-          <DataTable.Cell style={{ justifyContent: "center" }}>
+          <DataTable.Title style={{ justifyContent: "center" }}>
             Item
-          </DataTable.Cell>
-          <DataTable.Cell style={{ justifyContent: "center" }}>
+          </DataTable.Title>
+          <DataTable.Title style={{ justifyContent: "center" }}>
             Quanity
-          </DataTable.Cell>
-          <DataTable.Cell style={{ justifyContent: "center" }}>
+          </DataTable.Title>
+          <DataTable.Title style={{ justifyContent: "center" }}>
             Price
-          </DataTable.Cell>
+          </DataTable.Title>
         </DataTable.Row>
 
         <FlatList
-          data={data}
+          data={saveData}
           renderItem={({ item }) => (
             <View>
               <DataTable>
                 <DataTable.Row>
                   <DataTable.Cell style={{ justifyContent: "center" }}>
-                    {item.ordered[0].foodItem}
+                    {item.foodItem}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ justifyContent: "center" }}>
-                    {item.ordered[0].quantity}
+                    {item.quantity}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ justifyContent: "center" }}>
-                    {item.ordered[0].price}
+                    {item.price}
                   </DataTable.Cell>
                 </DataTable.Row>
               </DataTable>
@@ -69,8 +75,8 @@ const BillScreen = () => {
         />
 
         <View style={{ alignItems: "center" }}>
-          <Text>Paid</Text>
-          <Text>Reference ID: </Text>
+          <Text style={{ paddingVertical: 5 }}>Paid : Rs.{totalPrice}</Text>
+          <Text>Reference ID: {transactionId}</Text>
         </View>
       </View>
     </View>

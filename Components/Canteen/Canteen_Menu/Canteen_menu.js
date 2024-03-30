@@ -679,6 +679,12 @@ const Canteen_menu = (props) => {
                 <Text style={styles.textColor}>Rs.{item.price}</Text>
                 <Text style={styles.textColor}>{item.foodItem}</Text>
                 <View style={styles.line} />
+                <Image
+                  source={{
+                    uri: item.link,
+                  }}
+                  style={{ width: 200, height: 150, resizeMode: "contain" }}
+                />
               </View>
             )}
           />

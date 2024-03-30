@@ -26,10 +26,20 @@ const WorkshopScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text
+        style={[
+          styles.textColor,
+          { fontSize: 45, fontWeight: "bold", marginTop: 20 },
+        ]}
+      >
+        Workshops
+      </Text>
+      <View style={styles.line} />
       <FlatList
         data={data}
         style={{ width: "80%" }}
         extraData={state}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
             <Text style={[styles.textColor, styles.cardHeading]}>
@@ -38,6 +48,24 @@ const WorkshopScreen = () => {
             <View style={styles.line} />
             <Text style={[styles.textColor, styles.cardText]}>
               {item.details}
+            </Text>
+            <Text
+              style={[
+                styles.textColor,
+                styles.cardText,
+                { fontWeight: "bold", marginTop: 5, fontSize: 16 },
+              ]}
+            >
+              Teacher Incharge: {item.inCharge}
+            </Text>
+            <Text
+              style={[
+                styles.textColor,
+                styles.cardText,
+                { fontWeight: "bold", marginTop: 5, fontSize: 16 },
+              ]}
+            >
+              facilitator: {item.facilitator}
             </Text>
           </View>
         )}
@@ -56,7 +84,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flexShrink: 1,
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: "#171717",
     padding: 20,
     borderRadius: 10,
