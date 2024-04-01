@@ -66,6 +66,11 @@ function AcademicStackGroup() {
         name="Workshop"
         component={WorkshopScreen}
       />
+      <AcademicsStack.Screen
+        options={{ headerShown: false }}
+        name="TimeTableDownload"
+        component={TimeTableDownload}
+      />
     </AcademicsStack.Navigator>
   );
 }
